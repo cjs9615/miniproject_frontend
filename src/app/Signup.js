@@ -7,35 +7,70 @@ const Signup = () => {
         password: ''
     })
 
-    const handleChange = (event) => {
+    const [isdouble, setIsdouble] = useState(false);
+    const [doubletag, setDoubletag] = useState();
+    const [checkpassword, setCheckpassword] = useState('')
+
+    const handleIdChange = (event) => {
+        setMember({...member, [event.target.name] : event.target.value})
+        setIsdouble(false)
+        setDoubletag(<></>)
+    }
+
+    const handlePwChange = (event) => {
         setMember({...member, [event.target.name] : event.target.value})
     }
 
-    const checkPassword = (event) => {
-        setMember({...member, [event.target.name] : event.target.value})
+    const handleCheckPassword = (event) => {
+        setCheckpassword(event.target.value)
     }
 
-    const checkDouble = () => {
+    const handleCheckDouble = () => {
         fetch(SERVER_URL + 'api/public/checkdouble', {
             method: 'POST',
             headers: { 'Content-Type':'application/json' },
             body: member.username
         })
         .then(Response => Response.json())
-        .then((data) => console.log(data))
+        .then((data) => 
+        {if(data.username === null){
+            setDoubletag(<><div className="text-green-500">사용 가능한 아이디입니다.</div></>)
+            setIsdouble(true)
+        }
+        else{
+            setDoubletag(<><div className="text-red-500">이미 존재하는 아이디입니다.</div></>)
+        }})
         .catch(err => console.error(err))
     }
 
+    const authenticationPassword = (password) => {
+        if(password === ''){
+            return true
+        }
+        return false
+    }
+
     const signupSuccess = () => {
-        fetch(SERVER_URL + 'api/public/signup', {
-            method: 'POST',
-            headers: { 'Content-Type':'application/json' },
-            body: JSON.stringify(member)
-        })
-        .then(Response => {
-            return window.location.replace("/login")
-        })
-        .catch(err => console.error(err))
+        if(!isdouble){
+            alert('아이디 중복 확인하세요')
+        }
+        else if(checkpassword !== member.password){
+            alert('비밀번호가 일치하지 않습니다.')
+        }
+        else if(authenticationPassword(checkpassword)){
+            alert('허용되지않는 비밀번호입니다.')
+        }
+        else{
+            fetch(SERVER_URL + 'api/public/signup', {
+                method: 'POST',
+                headers: { 'Content-Type':'application/json' },
+                body: JSON.stringify(member)
+            })
+            .then(Response => {
+                return window.location.replace("/login")
+            })
+            .catch(err => console.error(err))
+        }
     }
     return (
         <section className="bg-gray-50 dark:bg-gray-900">
@@ -51,12 +86,13 @@ const Signup = () => {
                                 <input type="username"
                                     name="username"
                                     id="username"
-                                    placeholder="name@company.com"
+                                    placeholder=""
                                     required=""
                                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                                    onChange={handleChange}/>
+                                    onChange={handleIdChange}/>
                             </div>
-                            <ButtonBlue caption="중복확인" handleClick={checkDouble} />
+                            <ButtonBlue caption="중복확인" handleClick={handleCheckDouble} />
+                            {doubletag}
                             <div>
                                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">비밀번호</label>
                                 <input type="password"
@@ -64,7 +100,7 @@ const Signup = () => {
                                     id="password"
                                     placeholder="••••••••"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" 
-                                    onChange={handleChange}/>
+                                    onChange={handlePwChange}/>
                             </div>
                             <div>
                                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">비밀번호 확인</label>
@@ -73,7 +109,7 @@ const Signup = () => {
                                     id="checkpassword"
                                     placeholder="••••••••"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" 
-                                    onChange={checkPassword}/>
+                                    onChange={handleCheckPassword}/>
                             </div>
                             <ButtonBlue caption="가입완료" handleClick={signupSuccess} />
                         </div>

@@ -2,7 +2,7 @@
 const Profile = () => {
     return (
         <div>
-            profile
+            내정보
         </div>
     )
 }

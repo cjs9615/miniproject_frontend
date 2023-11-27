@@ -8,9 +8,12 @@ const RouteNav = () => {
     }
 
     const logout = () => {
-        alert("로그아웃하시겠습니까?")
-        sessionStorage.removeItem("jwt")
-        window.location.replace("/")
+        if (window.confirm("로그아웃하시겠습니까?")) {
+            sessionStorage.removeItem("jwt")
+            sessionStorage.removeItem("username")
+            window.location.replace("/")
+        } else {
+        }
     }
 
     return (

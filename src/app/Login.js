@@ -24,6 +24,7 @@ const Login = () => {
             const jwtToken = Response.headers.get('Authorization');
             if (jwtToken !== null) {
                 sessionStorage.setItem("jwt", jwtToken);
+                sessionStorage.setItem("username", user.username)
                 setAuth(true);
             }
             else{

@@ -12,7 +12,7 @@ const Main = () => {
         <BrowserRouter>
             <div className="flex flex-col w-full mx-auto h-screen">
                 <RouteNav/>
-                <div className='grow flex flex-col justify-center items-center'>
+                <div className='grow flex flex-col'>
                     <Routes>
                         <Route path="/" element={<FoodList/>}/>
                         <Route path="/mycalorie" element={<Mycalorie/>}/>

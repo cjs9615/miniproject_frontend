@@ -26,20 +26,27 @@ const Signup = () => {
     }
 
     const handleCheckDouble = () => {
+        if(member.username === '') {
+            alert('아이디를 입력하세요')
+            return
+        }
         fetch(SERVER_URL + 'api/public/checkdouble', {
             method: 'POST',
             headers: { 'Content-Type':'application/json' },
             body: member.username
         })
         .then(Response => Response.json())
-        .then((data) => 
-        {if(data.username === null){
-            setDoubletag(<><div className="text-green-500">사용 가능한 아이디입니다.</div></>)
-            setIsdouble(true)
-        }
-        else{
-            setDoubletag(<><div className="text-red-500">이미 존재하는 아이디입니다.</div></>)
-        }})
+        .then(data =>
+        console.log(data) 
+        // {if(data === ''){
+        //     setDoubletag(<><div className="text-green-500">사용 가능한 아이디입니다.</div></>)
+        //     setIsdouble(true)
+        // }
+        // else{
+        //     console.log(data)
+        //     setDoubletag(<><div className="text-red-500">이미 존재하는 아이디입니다.</div></>)
+        // }}
+        )
         .catch(err => console.error(err))
     }
 

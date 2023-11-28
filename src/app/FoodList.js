@@ -1,18 +1,25 @@
 import { useEffect, useState } from "react";
 import { SERVER_URL } from "../comm/constants";
 import ButtonBlue from "../comm/ButtonBlue"
+import Paging from "../comm/Paging";
+
 const FoodList = () => {
-    const [food, setFood] = useState([]);
+    const [foodList, setFoodList] = useState([]);
     const [foodTag, setFoodTag] = useState();
     const [keyword, setKeyword] = useState('');
-    const [footerTag, setFooterTag] = useState(); 
-
-    const handleChange = (event) => {
+    const [page, setPage] = useState(1);
+    const [currentPosts, setCurrentPosts] = useState([]);
+    const [postPerPage] = useState(10);
+    const indexOfLastPost = page * postPerPage
+    const indexOfFirstPost = indexOfLastPost - postPerPage
+    
+    const handleKeywordChange = (event) => {
         setKeyword(event.target.value)
     }
 
     const search = () => {
         if(keyword === ''){
+            alert('키워드를 입력하세요')
             return
         }
         fetch(SERVER_URL + 'api/public/search', {
@@ -21,14 +28,21 @@ const FoodList = () => {
             body: keyword
         })
         .then(Response => Response.json())
-        .then(data => setFood(data))
+        .then(data => setFoodList(data))
         .catch(err => console.error(err))
+        setPage(1)
     }
 
+    const handlePageChange = (page) => {
+        setPage(page);
+    };
+
     useEffect(() => {
-        console.log(food.length)
-        const temp = food
-        .filter((item, i) => i < 10)
+        setCurrentPosts(foodList.slice(indexOfFirstPost, indexOfLastPost));
+    }, [foodList, page, indexOfFirstPost, indexOfLastPost])
+
+    useEffect(() => {
+        let temp = currentPosts
         .map((item) => 
             <tr key={item.id}>
                 <td>{item.name}</td>
@@ -43,29 +57,21 @@ const FoodList = () => {
                 <td>{item.calorie}</td>
             </tr>
         )
-        setFoodTag(temp)
-
-        setFooterTag(
-            
-        )
-    }, [food])
-
-    useEffect(() => {
-        setFoodTag(
-            <tr>
-                <td>쌀밥</td>
-                <td>00</td>
-                <td>00</td>
-                <td>00</td>
-                <td>00</td>
-                <td>00</td>
-                <td>00</td>
-                <td>00</td>
-                <td>00</td>
-                <td>00</td>
-            </tr>
-        )
-    }, [])
+        temp.length === 0 
+        ? setFoodTag(<tr>
+                    <td>쌀밥</td>
+                    <td>00</td>
+                    <td>00</td>
+                    <td>00</td>
+                    <td>00</td>
+                    <td>00</td>
+                    <td>00</td>
+                    <td>00</td>
+                    <td>00</td>
+                    <td>00</td>
+                </tr>)
+        : setFoodTag(temp)
+    }, [currentPosts])
 
     return (
         <div>
@@ -73,7 +79,7 @@ const FoodList = () => {
                 <input type="text"
                     name="keyword"
                     id="keyword"
-                    onChange={handleChange}
+                    onChange={handleKeywordChange}
                 />
                 <ButtonBlue caption="검색" handleClick={search}/>
             </div>
@@ -97,8 +103,8 @@ const FoodList = () => {
                         {foodTag}
                     </tbody>
                 </table>
-                <div className="text-center">
-                    {footerTag}
+                <div>
+                    {<Paging page={page} count={foodList.length} setPage={handlePageChange}/>}
                 </div>
             </div>
         </div>

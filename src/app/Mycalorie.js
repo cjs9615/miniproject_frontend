@@ -5,7 +5,8 @@ const Mycalorie = () => {
     const today = new Date();
     const formattedDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
     const date = useRef()
-    const [foodtable, setFoodtable] = useState(<></>);
+    const [dietList, setdietList] = useState([]);
+    const [dietTag, setdietTag] = useState()
 
     const handleChangeDate = (event) => {
         console.log(event.target.value)
@@ -15,7 +16,7 @@ const Mycalorie = () => {
             body: event.target.value
         })
         .then(Response => Response.json())
-        .then((data) => console.log(data))
+        .then((data) => setdietList(data))
         .catch(err => console.error(err))
     }
 
@@ -49,9 +50,21 @@ const Mycalorie = () => {
             body: formattedDate
         })
         .then(Response => Response.json())
-        .then((data) => console.log(data))
+        .then((data) => setdietList(data))
         .catch(err => console.error(err))
     }, [formattedDate])
+
+    useEffect(() => {
+        const temp = dietList
+        .map((item) => 
+            <tr key={item[0]}>
+                <td>{item[3]}</td>
+                <td>{item[1].name}</td>
+                <td>{item[2]}</td>
+            </tr>
+        )
+        setdietTag(temp)
+    }, [dietList])
 
     return (
         <div>
@@ -60,7 +73,7 @@ const Mycalorie = () => {
                 <div>날짜 입력</div>
                 <input ref={date} type="date" id="date" name="date" onChange={handleChangeDate}/>
             </div>
-            <div className="flex">
+            <div className="flex justify-center">
                 <div className="flex m-5">
                     <div>시간 입력</div>
                     <input type="time" id="time" name="time" onChange={handleChangeTime}/>
@@ -77,7 +90,20 @@ const Mycalorie = () => {
                     <ButtonBlue caption='추가' handleClick={save}/>
                 </div>
             </div>
-            {foodtable}
+            <div className="mx-40 my-10">
+                <table className="table-auto">
+                    <thead>
+                        <tr>
+                            <th>시간</th>
+                            <th>음식이름</th>
+                            <th>그램수</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {dietTag}
+                    </tbody>
+                </table>
+            </div>
             <div className="mx-96">
                 <ButtonBlue caption='저장' handleClick={save}/>
             </div>

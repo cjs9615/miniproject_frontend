@@ -1,15 +1,28 @@
 import { useEffect, useState, useRef } from "react";
 import { SERVER_URL } from "../comm/constants";
 import ButtonBlue from "../comm/ButtonBlue"
+import Modal from "../comm/Modal";
+
 const Mycalorie = () => {
     const today = new Date();
     const formattedDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
     const date = useRef()
     const [dietList, setdietList] = useState([]);
     const [dietTag, setdietTag] = useState()
+    const [isOpen, setIsOpen] = useState(false)
+    const foodName = useRef()
+    const [foodId, setFoodId] = useState()
+    const [time, setTime] = useState()
+    const [gram, setGram] = useState()
+    const [memberFood, setMemberFood] = useState({
+        date: formattedDate,
+        time: '',
+        foodId: '',
+        gram: '',
+        memberUsername: sessionStorage.getItem('username')
+    })
 
     const handleChangeDate = (event) => {
-        console.log(event.target.value)
         fetch(SERVER_URL + 'api/private/memberfoodget', {
             method: 'POST',
             headers: { 'Content-Type':'application/json' },
@@ -18,18 +31,44 @@ const Mycalorie = () => {
         .then(Response => Response.json())
         .then((data) => setdietList(data))
         .catch(err => console.error(err))
+        setMemberFood({...memberFood, [event.target.name] : event.target.value})
     }
 
     const handleChangeTime = (event) => {
-        console.log(event.target.value)
+        setTime(event.target.value)
+        setMemberFood({...memberFood, [event.target.name] : event.target.value})
     }
 
-    const handleChangeName = (event) => {
+    const handleClickName = (event) => {
+        setIsOpen(true)
     }
 
     const handleChangeGram = (event) => {
+        setGram(event.target.value)
+        setMemberFood({...memberFood, [event.target.name] : event.target.value})
     }
 
+    const foodInsert = () => {
+        if(time === undefined){
+            alert('시간을 입력하세요')
+            return
+        }
+        if(foodId === undefined){
+            alert('음식이름을 입력하세요')
+            return
+        }
+        if(isNaN(gram) || gram === ''){
+            alert('그램에 숫자를 입력하세요')
+            return
+        }
+        fetch(SERVER_URL + 'api/private/memberfoodinsert', {
+            method: 'POST',
+            headers: { 'Content-Type':'application/json' },
+            body: JSON.stringify(memberFood)
+        })
+        .then(Response => console.log(Response))
+        .catch(err => console.error(err))
+    }
 
     const save = () => {
         fetch(SERVER_URL + 'api/private/save', {
@@ -80,14 +119,15 @@ const Mycalorie = () => {
                 </div>
                 <div className="flex m-5">
                     <div>음식 이름</div>
-                    <input type="text" id="name" name="name" onChange={handleChangeName}/>
+                    <input ref={foodName} type="text" id="name" name="name" placeholder="클릭하세요" readOnly onClick={handleClickName}/>
+                    <Modal isOpen={isOpen} setIsOpen={setIsOpen} foodName={foodName} setFoodId={setFoodId} memberFood={memberFood} setMemberFood={setMemberFood}/>
                 </div>
                 <div className="flex m-5">
                     <div>그램수</div>
                     <input type="text" id="gram" name="gram" onChange={handleChangeGram}/>
                 </div>
                 <div className="flex m-5">
-                    <ButtonBlue caption='추가' handleClick={save}/>
+                    <ButtonBlue caption='추가' handleClick={foodInsert}/>
                 </div>
             </div>
             <div className="mx-40 my-10">

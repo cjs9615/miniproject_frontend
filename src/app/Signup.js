@@ -37,15 +37,13 @@ const Signup = () => {
         })
         .then(Response => Response.json())
         .then(data =>
-        console.log(data) 
-        // {if(data === ''){
-        //     setDoubletag(<><div className="text-green-500">사용 가능한 아이디입니다.</div></>)
-        //     setIsdouble(true)
-        // }
-        // else{
-        //     console.log(data)
-        //     setDoubletag(<><div className="text-red-500">이미 존재하는 아이디입니다.</div></>)
-        // }}
+        {if(data.username === null){
+            setDoubletag(<><div className="text-green-500">사용 가능한 아이디입니다.</div></>)
+            setIsdouble(true)
+        }
+        else{
+            setDoubletag(<><div className="text-red-500">이미 존재하는 아이디입니다.</div></>)
+        }}
         )
         .catch(err => console.error(err))
     }

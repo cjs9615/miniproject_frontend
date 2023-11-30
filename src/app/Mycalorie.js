@@ -11,9 +11,8 @@ const Mycalorie = () => {
     const [dietTag, setdietTag] = useState()
     const [isOpen, setIsOpen] = useState(false)
     const foodName = useRef()
-    const [foodId, setFoodId] = useState()
-    const [time, setTime] = useState()
-    const [gram, setGram] = useState()
+    const time = useRef()
+    const gram = useRef()
     const [memberFood, setMemberFood] = useState({
         date: formattedDate,
         time: '',
@@ -23,10 +22,13 @@ const Mycalorie = () => {
     })
 
     const handleChangeDate = (event) => {
+        time.current.value = ''
+        foodName.current.value = ''
+        gram.current.value = ''
         fetch(SERVER_URL + 'api/private/memberfoodget', {
             method: 'POST',
             headers: { 'Content-Type':'application/json' },
-            body: event.target.value
+            body: event.target.value + "," + memberFood.memberUsername
         })
         .then(Response => Response.json())
         .then((data) => setdietList(data))
@@ -35,29 +37,27 @@ const Mycalorie = () => {
     }
 
     const handleChangeTime = (event) => {
-        setTime(event.target.value)
         setMemberFood({...memberFood, [event.target.name] : event.target.value})
     }
 
-    const handleClickName = (event) => {
+    const handleClickName = () => {
         setIsOpen(true)
     }
 
     const handleChangeGram = (event) => {
-        setGram(event.target.value)
         setMemberFood({...memberFood, [event.target.name] : event.target.value})
     }
 
     const foodInsert = () => {
-        if(time === undefined){
+        if(time.current.value === undefined || time.current.value === ''){
             alert('시간을 입력하세요')
             return
         }
-        if(foodId === undefined){
+        if(foodName.current.value === undefined || foodName.current.value === ''){
             alert('음식이름을 입력하세요')
             return
         }
-        if(isNaN(gram) || gram === ''){
+        if(isNaN(gram.current.value) || gram.current.value === ''){
             alert('그램에 숫자를 입력하세요')
             return
         }
@@ -66,7 +66,14 @@ const Mycalorie = () => {
             headers: { 'Content-Type':'application/json' },
             body: JSON.stringify(memberFood)
         })
-        .then(Response => console.log(Response))
+        .then(Response => setdietTag(
+        //     dietTag + <tr key={time.current.value + foodName.current.value}>
+        //     <td>{time.current.value}</td>
+        //     <td>{foodName.current.value}</td>
+        //     <td>{gram.current.value}</td>
+        // </tr>
+        <></>
+            ))
         .catch(err => console.error(err))
     }
 
@@ -86,7 +93,7 @@ const Mycalorie = () => {
         fetch(SERVER_URL + 'api/private/memberfoodget', {
             method: 'POST',
             headers: { 'Content-Type':'application/json' },
-            body: formattedDate
+            body: formattedDate + "," + sessionStorage.getItem("username")
         })
         .then(Response => Response.json())
         .then((data) => setdietList(data))
@@ -95,6 +102,7 @@ const Mycalorie = () => {
 
     useEffect(() => {
         const temp = dietList
+        .sort((a, b) => parseInt(a[3]) - parseInt(b[3]))
         .map((item) => 
             <tr key={item[0]}>
                 <td>{item[3]}</td>
@@ -115,16 +123,16 @@ const Mycalorie = () => {
             <div className="flex justify-center">
                 <div className="flex m-5">
                     <div>시간 입력</div>
-                    <input type="time" id="time" name="time" onChange={handleChangeTime}/>
+                    <input ref={time} type="time" id="time" name="time" onChange={handleChangeTime}/>
                 </div>
                 <div className="flex m-5">
                     <div>음식 이름</div>
                     <input ref={foodName} type="text" id="name" name="name" placeholder="클릭하세요" readOnly onClick={handleClickName}/>
-                    <Modal isOpen={isOpen} setIsOpen={setIsOpen} foodName={foodName} setFoodId={setFoodId} memberFood={memberFood} setMemberFood={setMemberFood}/>
+                    <Modal isOpen={isOpen} setIsOpen={setIsOpen} foodName={foodName} memberFood={memberFood} setMemberFood={setMemberFood}/>
                 </div>
                 <div className="flex m-5">
                     <div>그램수</div>
-                    <input type="text" id="gram" name="gram" onChange={handleChangeGram}/>
+                    <input ref={gram} type="text" id="gram" name="gram" onChange={handleChangeGram}/>
                 </div>
                 <div className="flex m-5">
                     <ButtonBlue caption='추가' handleClick={foodInsert}/>

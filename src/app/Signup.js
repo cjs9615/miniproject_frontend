@@ -35,16 +35,48 @@ const Signup = () => {
             headers: { 'Content-Type':'application/json' },
             body: member.username
         })
-        .then(Response => Response.json())
-        .then(data =>
-        {if(data.username === null){
-            setDoubletag(<><div className="text-green-500">사용 가능한 아이디입니다.</div></>)
-            setIsdouble(true)
-        }
-        else{
-            setDoubletag(<><div className="text-red-500">이미 존재하는 아이디입니다.</div></>)
-        }}
+        .then(Response => Response.body)
+        .then((rb) => {
+            const reader = rb.getReader();
+
+            return new ReadableStream({
+                start(controller) {
+                    // The following function handles each data chunk
+                    function push() {
+                        // "done" is a Boolean and value a "Uint8Array"
+                        reader.read().then(({ done, value }) => {
+                            // If there is no more data to read
+                            if (done) {
+                                //console.log("done", done);
+                                controller.close();
+                                return;
+                            }
+                            // Get the data and send it to the browser via the controller
+                            controller.enqueue(value);
+                            // Check chunks by logging to the console
+                            //console.log(done, value);
+                            push();
+                        });
+                    }
+
+                    push();
+                },
+            });
+        })
+        .then((stream) =>
+            // Respond with our stream
+            new Response(stream, { headers: { "Content-Type": "text/html" } }).text(),
         )
+        .then((result) => {
+            // Do things with result
+            if(result === 'false'){
+                setDoubletag(<><div className="text-green-500">사용 가능한 아이디입니다.</div></>)
+                setIsdouble(true)
+            }
+            else{
+                setDoubletag(<><div className="text-red-500">이미 존재하는 아이디입니다.</div></>)
+            }
+        })
         .catch(err => console.error(err))
     }
 

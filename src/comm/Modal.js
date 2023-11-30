@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import ReactModal from "react-modal"
 import { SERVER_URL } from "./constants";
 import Paging from "./Paging";
-const Modal = ({isOpen, setIsOpen, foodName, setFoodId, memberFood, setMemberFood}) => {
+const Modal = ({isOpen, setIsOpen, foodName, memberFood, setMemberFood}) => {
     const [foodList, setFoodList] = useState([]);
     const [foodTag, setFoodTag] = useState();
-    const [keyword, setKeyword] = useState('');
+    const [keyword, setKeyword] = useState();
     const [page, setPage] = useState(1);
+    const [count, setCount] = useState(0)
     const [currentPosts, setCurrentPosts] = useState([]);
     const [postPerPage] = useState(10);
     const indexOfLastPost = page * postPerPage
@@ -21,7 +22,7 @@ const Modal = ({isOpen, setIsOpen, foodName, setFoodId, memberFood, setMemberFoo
     };
 
     useEffect(() => {
-        if(keyword === ''){
+        if(keyword === '' || keyword === undefined){
             return
         }
         fetch(SERVER_URL + 'api/public/search', {
@@ -37,6 +38,7 @@ const Modal = ({isOpen, setIsOpen, foodName, setFoodId, memberFood, setMemberFoo
 
     useEffect(() => {
         setCurrentPosts(foodList.slice(indexOfFirstPost, indexOfLastPost));
+        setCount(foodList.length)
     }, [foodList, page, indexOfFirstPost, indexOfLastPost])
 
     useEffect(() => {
@@ -44,7 +46,6 @@ const Modal = ({isOpen, setIsOpen, foodName, setFoodId, memberFood, setMemberFoo
         .map((item) => 
             <tr className="hover:bg-gray-400" key={item.id} onClick={() => {
                 foodName.current.value = item.name
-                setFoodId(item.id)
                 setMemberFood({...memberFood, 'foodId' : item.id})
                 setIsOpen(false)
             }}>
@@ -61,7 +62,14 @@ const Modal = ({isOpen, setIsOpen, foodName, setFoodId, memberFood, setMemberFoo
             </tr>
         )
         setFoodTag(temp)
-    }, [currentPosts, foodName, setFoodId, setIsOpen, memberFood, setMemberFood])
+    }, [currentPosts, foodName, setIsOpen, memberFood, setMemberFood])
+
+    useEffect(() => {
+        if(isOpen === false){
+            setFoodTag(<></>)
+            setCount(0)
+        }
+    }, [isOpen])
 
     return (
         <ReactModal isOpen={isOpen} onRequestClose={() => setIsOpen(false)}>
@@ -93,12 +101,10 @@ const Modal = ({isOpen, setIsOpen, foodName, setFoodId, memberFood, setMemberFoo
                     </tbody>
                 </table>
                 <div>
-                    {<Paging page={page} count={foodList.length} setPage={handlePageChange}/>}
+                    {<Paging page={page} count={count} setPage={handlePageChange}/>}
                 </div>
             </div>
-            <button onClick={() => {
-                setIsOpen(false) 
-                setFoodTag(<></>)}}>닫기</button>
+            <button onClick={() => setIsOpen(false)}>닫기</button>
         </ReactModal>
     )
 }

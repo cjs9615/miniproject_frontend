@@ -12,8 +12,7 @@ const RouteNav = () => {
             sessionStorage.removeItem("jwt")
             sessionStorage.removeItem("username")
             window.location.replace("/")
-        } else {
-        }
+        } else {}
     }
 
     return (

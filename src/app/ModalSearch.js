@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import ReactModal from "react-modal"
-import { SERVER_URL } from "./constants";
-import Paging from "./Paging";
-const Modal = ({isOpen, setIsOpen, foodName, memberFood, setMemberFood}) => {
+import { SERVER_URL } from "../comm/constants";
+import Paging from "../comm/Paging";
+const Modal = ({isOpen, setIsOpen, foodName, memberFood, setMemberFood, setInsertFood}) => {
     const [foodList, setFoodList] = useState([]);
     const [foodTag, setFoodTag] = useState();
     const [keyword, setKeyword] = useState();
@@ -47,6 +47,7 @@ const Modal = ({isOpen, setIsOpen, foodName, memberFood, setMemberFood}) => {
             <tr className="hover:bg-gray-400" key={item.id} onClick={() => {
                 foodName.current.value = item.name
                 setMemberFood({...memberFood, 'foodId' : item.id})
+                setInsertFood(item)
                 setIsOpen(false)
             }}>
                 <td>{item.name}</td>
@@ -62,10 +63,10 @@ const Modal = ({isOpen, setIsOpen, foodName, memberFood, setMemberFood}) => {
             </tr>
         )
         setFoodTag(temp)
-    }, [currentPosts, foodName, setIsOpen, memberFood, setMemberFood])
+    }, [currentPosts, foodName, setIsOpen, memberFood, setMemberFood, setInsertFood])
 
     useEffect(() => {
-        if(isOpen === false){
+        if(isOpen === true){
             setFoodTag(<></>)
             setCount(0)
         }

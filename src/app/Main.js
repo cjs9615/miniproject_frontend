@@ -6,6 +6,7 @@ import Login from "./Login"
 import Mycalorie from "./Mycalorie"
 import Signup from "./Signup"
 import Profile from "./Profile"
+import MycalorieInsert from "./MycalorieInsert"
 
 const Main = () => {
     return (
@@ -16,6 +17,7 @@ const Main = () => {
                     <Routes>
                         <Route path="/" element={<FoodList/>}/>
                         <Route path="/mycalorie" element={<Mycalorie/>}/>
+                        <Route path="/mycalorieinsert" element={<MycalorieInsert/>}/>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/signup" element={<Signup/>}/>
                         <Route path="/profile" element={<Profile/>}/>

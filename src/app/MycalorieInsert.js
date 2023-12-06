@@ -84,7 +84,7 @@ const MycalorieInsert = () => {
         })
         .then(Response => {
             let tempList = dietList.map((item) => item)
-            const temp = [time.current.value+insertFood.name,insertFood,gram.current.value,time.current.value]
+            const temp = [time.current.value+insertFood.name,insertFood,gram.current.value,time.current.value,'']
             tempList.push(temp)
             setDietList(tempList)
         })

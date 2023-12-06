@@ -123,7 +123,11 @@ const ModalUpdate = ({isOpen, setIsOpen, date, updateFood, dietList, setDietList
     }, [isOpen, updateFood, date])
 
     useEffect(() => {
-        if(!isUpdate) return
+        if(!isUpdate) {
+            setFoodComment(undefined)
+            setFoodGram(undefined)
+            return
+        }
         gram.current.value = memberFood['gram']
         comment.current.value = memberFood['comment']
     }, [isUpdate, memberFood])

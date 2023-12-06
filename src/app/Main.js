@@ -7,6 +7,7 @@ import Mycalorie from "./Mycalorie"
 import Signup from "./Signup"
 import Profile from "./Profile"
 import MycalorieInsert from "./MycalorieInsert"
+import MycalorieView from "./MycalorieView"
 
 const Main = () => {
     return (
@@ -18,6 +19,7 @@ const Main = () => {
                         <Route path="/" element={<FoodList/>}/>
                         <Route path="/mycalorie" element={<Mycalorie/>}/>
                         <Route path="/mycalorieinsert" element={<MycalorieInsert/>}/>
+                        <Route path="/mycalorieview" element={<MycalorieView/>}/>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/signup" element={<Signup/>}/>
                         <Route path="/profile" element={<Profile/>}/>

@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { SERVER_URL } from "../comm/constants";
-import ButtonBlue from "../comm/ButtonBlue"
+import ButtonBlue from "../comm/ButtonGreen"
 import ModalSearch from "./ModalSearch";
 import ModalUpdate from "./ModalUpdate";
 

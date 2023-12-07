@@ -1,5 +1,5 @@
 import TailFooter from "../comm/TailFooter"
-import FoodList from "./FoodList"
+
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import RouteNav from "../comm/RouteNav"
 import Login from "./Login"
@@ -9,15 +9,17 @@ import Profile from "./Profile"
 import MycalorieInsert from "./MycalorieInsert"
 import MycalorieView from "./MycalorieView"
 import MycalorieWeek from "./MycalorieWeek"
-
+import Index from "./Index"
+import FoodList from "./FoodList"
 const Main = () => {
     return (
         <BrowserRouter>
-            <div className="flex flex-col w-full mx-auto h-screen">
+            <div className="flex flex-col items-center">
                 <RouteNav/>
                 <div className='grow flex flex-col'>
                     <Routes>
-                        <Route path="/" element={<FoodList/>}/>
+                        <Route path="/" element={<Index/>}/>
+                        <Route path="/searchfood" element={<FoodList/>}/>
                         <Route path="/mycalorie" element={<Mycalorie/>}/>
                         <Route path="/mycalorieinsert" element={<MycalorieInsert/>}/>
                         <Route path="/mycalorieview" element={<MycalorieView/>}/>

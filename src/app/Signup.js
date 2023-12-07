@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SERVER_URL } from "../comm/constants";
-import ButtonBlue from "../comm/ButtonBlue"
+import ButtonBlue from "../comm/ButtonGreen"
 const Signup = () => {
     const [member, setMember] = useState({
         username: '',

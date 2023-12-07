@@ -1,4 +1,4 @@
-import ButtonBlue from "../comm/ButtonBlue"
+import ButtonBlue from "../comm/ButtonGreen"
 
 const Profile = () => {
     return (

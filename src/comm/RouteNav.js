@@ -16,20 +16,22 @@ const RouteNav = () => {
     }
 
     return (
-        <div className="flex max-w-screen-xl justify-between item-center p-4">
-            <div>
-                Diet
+        <div className="flex w-screen justify-center bg-nav">
+            <div className="flex w-3/4 justify-between p-4">
+                <div>
+                    Diet
+                </div>
+                <nav>
+                    <TailLink href="/searchfood" title="영양정보 검색" />
+                    {jwt === null 
+                    ?<><TailLink title="나의식단" handleClick={authen}/>
+                    <TailLink href="/login" title="로그인"/>
+                    <TailLink href="/signup" title="회원가입"/></>
+                    :<><TailLink href="/mycalorie" title="나의칼로리"/>
+                    <TailLink title="로그아웃" handleClick={logout}/>
+                    <TailLink href="/profile" title="프로필"/></>}
+                </nav>
             </div>
-            <nav>
-                <TailLink href="/" title="음식칼로리" />
-                {jwt === null 
-                ?<><TailLink title="나의칼로리" handleClick={authen}/>
-                <TailLink href="/login" title="로그인"/>
-                <TailLink href="/signup" title="회원가입"/></>
-                :<><TailLink href="/mycalorie" title="나의칼로리"/>
-                <TailLink title="로그아웃" handleClick={logout}/>
-                <TailLink href="/profile" title="프로필"/></>}
-            </nav>
         </div>
     )
 }

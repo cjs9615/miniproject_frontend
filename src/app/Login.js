@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { SERVER_URL } from "../comm/constants";
-import ButtonBlue from "../comm/ButtonBlue"
+import ButtonBlue from "../comm/ButtonGreen"
 
 const Login = () => {
     const [user, setUser] = useState({

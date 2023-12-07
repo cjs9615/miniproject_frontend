@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { SERVER_URL } from "../comm/constants";
-import ButtonBlue from "../comm/ButtonBlue"
 import Paging from "../comm/Paging";
+import ButtonSearch from "../comm/ButtonSearch";
 
 const FoodList = () => {
     const [foodList, setFoodList] = useState([]);
@@ -74,37 +74,45 @@ const FoodList = () => {
     }, [currentPosts])
 
     return (
-        <div>
-            <div className="mx-96">
-                <input type="text"
-                    name="keyword"
-                    id="keyword"
-                    onChange={handleKeywordChange}
-                />
-                <ButtonBlue caption="검색" handleClick={search}/>
-            </div>
-            <div className="mx-10 my-5">
-                <table className="table-auto">
-                    <thead>
-                        <tr>
-                            <th>음식</th>
-                            <th>탄수화물(g)</th>
-                            <th>단백질(g)</th>
-                            <th>지방(g)</th>
-                            <th>당류(g)</th>
-                            <th>나트륨(mg)</th>
-                            <th>콜레스테롤(mg)</th>
-                            <th>포화지방산(g)</th>
-                            <th>트랜스지방산(g)</th>
-                            <th>열량(kcal)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {foodTag}
-                    </tbody>
-                </table>
-                <div>
-                    {<Paging page={page} count={foodList.length} setPage={handlePageChange}/>}
+        <div className="flex w-screen h-screen justify-center">
+            <div className="w-3/4">
+                <div className='mt-5 mb-3 pb-2 border-b-2 border-b-black text-2xl' style={{fontFamily: "Noto Sans KR"}}>
+                    영양정보 검색
+                </div>
+                <div className="flex h-24 border-2 border-gray-200 rounded-xl items-center">
+                    <input className="ml-14 mt-5 w-5/6 h-1/2" 
+                        type="text"
+                        name="keyword"
+                        id="keyword"
+                        onChange={handleKeywordChange}
+                    />
+                    <div className="mr-14 w-1/6 h-1/2">
+                        <ButtonSearch handleClick={search}/>
+                    </div>
+                </div>
+                <div className="mx-10 my-5">
+                    <table className="table-auto">
+                        <thead>
+                            <tr>
+                                <th>음식</th>
+                                <th>탄수화물(g)</th>
+                                <th>단백질(g)</th>
+                                <th>지방(g)</th>
+                                <th>당류(g)</th>
+                                <th>나트륨(mg)</th>
+                                <th>콜레스테롤(mg)</th>
+                                <th>포화지방산(g)</th>
+                                <th>트랜스지방산(g)</th>
+                                <th>열량(kcal)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {foodTag}
+                        </tbody>
+                    </table>
+                    <div>
+                        {<Paging page={page} count={foodList.length} setPage={handlePageChange}/>}
+                    </div>
                 </div>
             </div>
         </div>

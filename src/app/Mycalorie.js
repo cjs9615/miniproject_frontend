@@ -21,12 +21,14 @@ const Mycalorie = () => {
         //         </div>
         //     </div>
         // </div>
-        <div className="flex py-20 space-x-20 justify-center ">
-            <div onClick={handleClickInsert}>
-                <CircleButton name="내 식단 입력" color="#AEC3AE" background="white" onClick={handleClickInsert}/>
-            </div>
-            <div onClick={handleClickView}>
-                <CircleButton name="내가 섭취한 칼로리(일별/주별/월별)" color="#EEC759" background="white" onClick={handleClickView}/>
+        <div className="flex w-screen h-screen justify-center">
+            <div className="flex w-3/5 h-3/4">
+                <div className="flex w-1/2 justify-center items-center" style={{fontFamily: "Noto Sans KR"}}>
+                    <CircleButton name="내 식단 입력" color="#AEC3AE" background="white" handleClick={handleClickInsert}/>
+                </div>
+                <div className="flex w-1/2 justify-center items-center" style={{fontFamily: "Noto Sans KR"}}>
+                    <CircleButton name="내가 섭취한 칼로리(일별/주별/월별)" color="#EEC759" background="white" handleClick={handleClickView}/>
+                </div>
             </div>
         </div>
     ); 

@@ -16,7 +16,7 @@ const Main = () => {
         <BrowserRouter>
             <div className="flex flex-col items-center">
                 <RouteNav/>
-                <div className='grow flex flex-col'>
+                <div>
                     <Routes>
                         <Route path="/" element={<Index/>}/>
                         <Route path="/searchfood" element={<FoodList/>}/>

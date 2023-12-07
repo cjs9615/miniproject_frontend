@@ -45,74 +45,63 @@ const FoodList = () => {
         let temp = currentPosts
         .map((item) => 
             <tr key={item.id}>
-                <td>{item.name}</td>
-                <td>{item.carbohydrates}</td>
-                <td>{item.protein}</td>
-                <td>{item.fat}</td>
-                <td>{item.sugar}</td>
-                <td>{item.sodium}</td>
-                <td>{item.cholesterol}</td>
-                <td>{item.saturatedfattyacids}</td>
-                <td>{item.transfattyacids}</td>
-                <td>{item.calorie}</td>
+                <td className="text-xs">{item.name}</td>
+                <td className="text-right text-xs">{item.carbohydrates}</td>
+                <td className="text-right text-xs">{item.protein}</td>
+                <td className="text-right text-xs">{item.fat}</td>
+                <td className="text-right text-xs">{item.calorie}</td>
             </tr>
         )
         temp.length === 0 
         ? setFoodTag(<tr>
-                    <td>쌀밥</td>
-                    <td>00</td>
-                    <td>00</td>
-                    <td>00</td>
-                    <td>00</td>
-                    <td>00</td>
-                    <td>00</td>
-                    <td>00</td>
-                    <td>00</td>
-                    <td>00</td>
+                    <td className="text-xs">쌀밥</td>
+                    <td className="text-right text-xs">00</td>
+                    <td className="text-right text-xs">00</td>
+                    <td className="text-right text-xs">00</td>
+                    <td className="text-right text-xs">00</td>
                 </tr>)
         : setFoodTag(temp)
     }, [currentPosts])
 
     return (
         <div className="flex w-screen h-screen justify-center">
-            <div className="w-3/4">
-                <div className='mt-5 mb-3 pb-2 border-b-2 border-b-black text-2xl' style={{fontFamily: "Noto Sans KR"}}>
-                    영양정보 검색
-                </div>
-                <div className="flex h-24 border-2 border-gray-200 rounded-xl items-center">
-                    <input className="ml-14 mt-5 w-5/6 h-1/2" 
-                        type="text"
-                        name="keyword"
-                        id="keyword"
-                        onChange={handleKeywordChange}
-                    />
-                    <div className="mr-14 w-1/6 h-1/2">
-                        <ButtonSearch handleClick={search}/>
+            <div className="w-3/5 h-full">
+                <div className="h-1/5">
+                    <div className='mt-5 mb-3 pb-2 border-b-2 border-b-black text-2xl' style={{fontFamily: "Noto Sans KR"}}>
+                        영양정보 검색
+                    </div>
+                    <div className="flex h-24 border-2 border-gray-200 rounded-xl items-center">
+                        <input className="ml-14 mt-5 w-5/6 h-1/2" 
+                            type="text"
+                            name="keyword"
+                            id="keyword"
+                            onChange={handleKeywordChange}
+                        />
+                        <div className="mr-14 w-1/6 h-1/2">
+                            <ButtonSearch handleClick={search}/>
+                        </div>
                     </div>
                 </div>
-                <div className="mx-10 my-5">
-                    <table className="table-auto">
-                        <thead>
-                            <tr>
-                                <th>음식</th>
-                                <th>탄수화물(g)</th>
-                                <th>단백질(g)</th>
-                                <th>지방(g)</th>
-                                <th>당류(g)</th>
-                                <th>나트륨(mg)</th>
-                                <th>콜레스테롤(mg)</th>
-                                <th>포화지방산(g)</th>
-                                <th>트랜스지방산(g)</th>
-                                <th>열량(kcal)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {foodTag}
-                        </tbody>
-                    </table>
-                    <div>
-                        {<Paging page={page} count={foodList.length} setPage={handlePageChange}/>}
+                <div className="mt-1 h-2/4">
+                    <div className="h-5/6">
+                        <table className="table-fixed">
+                            <thead>
+                                <tr>
+                                    <th className="w-5/12 text-center text-sm">음식(100g당)</th>
+                                    <th className="text-center text-sm">탄수화물(g)</th>
+                                    <th className="text-center text-sm">단백질(g)</th>
+                                    <th className="text-center text-sm">지방(g)</th>
+                                    <th className="text-center text-sm">열량(kcal)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {foodTag}
+                            </tbody>
+                        </table>
                     </div>
+                </div>
+                <div className="h-1/5">
+                    {<Paging page={page} count={foodList.length} setPage={handlePageChange}/>}
                 </div>
             </div>
         </div>

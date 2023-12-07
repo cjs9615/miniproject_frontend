@@ -109,53 +109,67 @@ const MycalorieInsert = () => {
         .map((item) => 
             <tr className="hover:bg-gray-400" key={item[0]} onClick={() => {setIsUpdateOpen(true)
                                                                               setUpdateFood(item)}}>
-                <td>{item[3]}</td>
+                <td className="text-center">{item[3]}</td>
                 <td>{item[1].name}</td>
-                <td>{item[2]}</td>
+                <td className="text-right">{item[2]}</td>
             </tr>
         )
         setDietTag(temp)
     }, [dietList])
 
     return (
-        <div>
-            <div className="text-5xl mx-96 mb-3">내 식단 입력</div>
-            <div className="mx-96">
-                <div>날짜 입력</div>
-                <input ref={date} type="date" id="date" name="date" onChange={handleChangeDate}/>
-            </div>
-            <div className="flex justify-center">
-                <div className="flex m-5">
-                    <div>시간 입력</div>
-                    <input ref={time} type="time" id="time" name="time" onChange={handleChangeTime}/>
+        <div className="flex w-screen h-screen justify-center">
+            <div className="w-3/5 h-full">
+                <div className="h-1/4">
+                    <div className='mt-5 mb-3 pb-2 border-b-2 border-b-black text-2xl' style={{fontFamily: "Noto Sans KR"}}>
+                        내 식단 입력
+                    </div>
+                    <div className="border-2 border-gray-200 rounded-xl">
+                        <div className="flex ml-2 mt-3 items-center">
+                            <div className="w-1/6">
+                                <input ref={date} type="date" id="date" name="date" onChange={handleChangeDate}/>
+                            </div>
+                        </div>
+                        <div className="flex ml-2 items-center">
+                            <div className="flex w-1/5">
+                                <div>
+                                    <input ref={time} type="time" id="time" name="time" onChange={handleChangeTime}/>
+                                </div>
+                            </div>
+                            <div className="flex w-3/12 mr-2">
+                                <div className="flex mb-3 w-1/3 items-center justify-center">음식</div>
+                                <div className="w-2/3">
+                                    <input ref={foodName} type="text" id="name" name="name" placeholder="클릭하세요" readOnly onClick={handleClickName}/>
+                                    <ModalSearch isOpen={isSearchOpen} setIsOpen={setIsSearchOpen} foodName={foodName} memberFood={memberFood} setMemberFood={setMemberFood} setInsertFood={setInsertFood}/>
+                                </div>
+                            </div>
+                            <div className="flex w-3/12 mr-2">
+                                <div className="flex mb-3 w-1/3 items-center justify-center">그램</div>
+                                <div className="w-2/3">
+                                    <input ref={gram} type="text" id="gram" name="gram" onChange={handleChangeGram}/>
+                                </div>
+                            </div>
+                            <div className="flex w-1/12">
+                                <ButtonBlue caption='추가' handleClick={foodInsert}/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="flex m-5">
-                    <div>음식 이름</div>
-                    <input ref={foodName} type="text" id="name" name="name" placeholder="클릭하세요" readOnly onClick={handleClickName}/>
-                    <ModalSearch isOpen={isSearchOpen} setIsOpen={setIsSearchOpen} foodName={foodName} memberFood={memberFood} setMemberFood={setMemberFood} setInsertFood={setInsertFood}/>
+                <div className="mt-10">
+                    <table className="table-fixed">
+                        <thead>
+                            <tr>
+                                <th className="text-center">시간</th>
+                                <th className="w-1/2 text-center">음식이름</th>
+                                <th className="text-center">그램수</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {dietTag}
+                        </tbody>
+                    </table>
+                    {date.current === undefined ? <></> : <ModalUpdate isOpen={isUpdateOpen} setIsOpen={setIsUpdateOpen} date={date} updateFood={updateFood} dietList={dietList} setDietList={setDietList}/>}
                 </div>
-                <div className="flex m-5">
-                    <div>그램수</div>
-                    <input ref={gram} type="text" id="gram" name="gram" onChange={handleChangeGram}/>
-                </div>
-                <div className="flex m-5">
-                    <ButtonBlue caption='추가' handleClick={foodInsert}/>
-                </div>
-            </div>
-            <div className="mx-40 my-10">
-                <table className="table-auto">
-                    <thead>
-                        <tr>
-                            <th>시간</th>
-                            <th>음식이름</th>
-                            <th>그램수</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {dietTag}
-                    </tbody>
-                </table>
-                {date.current === undefined ? <></> : <ModalUpdate isOpen={isUpdateOpen} setIsOpen={setIsUpdateOpen} date={date} updateFood={updateFood} dietList={dietList} setDietList={setDietList}/>}
             </div>
         </div>
     ); 

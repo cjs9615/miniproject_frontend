@@ -16,8 +16,8 @@ const Index = () => {
         <div className='w-screen h-screen'>
             <div className='flex flex-col h-1/2 items-center bg-nav'>
                 <div className='flex flex-col w-3/5'>
-                    <div className='flex text-green-900 justify-center text-4xl' style={{fontFamily: "Noto Sans KR"}}>
-                        식단 저장소
+                    <div className='flex text-green-900 justify-center text-4xl' style={{fontFamily: "Open Sans"}}>
+                        Diet Diary
                     </div>
                     <img className='w-60 h-60' src={salad} alt='vegetable'/>
                     

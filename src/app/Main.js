@@ -11,6 +11,7 @@ import MycalorieView from "./MycalorieView"
 import MycalorieWeek from "./MycalorieWeek"
 import Index from "./Index"
 import FoodList from "./FoodList"
+import MycalorieDay from "./MycalorieDay"
 const Main = () => {
     return (
         <BrowserRouter>
@@ -23,6 +24,7 @@ const Main = () => {
                         <Route path="/mycalorie" element={<Mycalorie/>}/>
                         <Route path="/mycalorieinsert" element={<MycalorieInsert/>}/>
                         <Route path="/mycalorieview" element={<MycalorieView/>}/>
+                        <Route path="/mycalorieday" element={<MycalorieDay/>}/>
                         <Route path="/mycalorieweek" element={<MycalorieWeek/>}/>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/signup" element={<Signup/>}/>

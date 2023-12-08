@@ -7,7 +7,9 @@ module.exports = {
       colors: {
         'vegetable': '#C1DABA',
         'nav': '#EDEEE9',
-        'main': '#F2EFDC'
+        'index': '#363C18',
+        'main': '#F2EFDC',
+        'bt': '#8CA474'
       },
     },
   },

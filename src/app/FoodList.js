@@ -45,20 +45,20 @@ const FoodList = () => {
         let temp = currentPosts
         .map((item) => 
             <tr key={item.id}>
-                <td className="text-xs">{item.name}</td>
-                <td className="text-right text-xs">{item.carbohydrates}</td>
-                <td className="text-right text-xs">{item.protein}</td>
-                <td className="text-right text-xs">{item.fat}</td>
-                <td className="text-right text-xs">{item.calorie}</td>
+                <td className="text-xs" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>{item.name}</td>
+                <td className="text-right text-xs" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>{item.carbohydrates}</td>
+                <td className="text-right text-xs" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>{item.protein}</td>
+                <td className="text-right text-xs" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>{item.fat}</td>
+                <td className="text-right text-xs" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>{item.calorie}</td>
             </tr>
         )
         temp.length === 0 
         ? setFoodTag(<tr>
-                    <td className="text-xs">쌀밥</td>
-                    <td className="text-right text-xs">00</td>
-                    <td className="text-right text-xs">00</td>
-                    <td className="text-right text-xs">00</td>
-                    <td className="text-right text-xs">00</td>
+                    <td className="text-xs" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>(ex)멥쌀, 백미, 밥</td>
+                    <td className="text-right text-xs" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>00</td>
+                    <td className="text-right text-xs" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>00</td>
+                    <td className="text-right text-xs" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>00</td>
+                    <td className="text-right text-xs" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>00</td>
                 </tr>)
         : setFoodTag(temp)
     }, [currentPosts])
@@ -67,7 +67,7 @@ const FoodList = () => {
         <div className="flex w-screen h-screen justify-center">
             <div className="w-3/5 h-full">
                 <div className="h-1/5">
-                    <div className='mt-5 mb-3 pb-2 border-b-2 border-b-black text-2xl' style={{fontFamily: "Noto Sans KR"}}>
+                    <div className='mt-5 mb-3 pb-2 border-b-2 border-b-black text-2xl' style={{fontFamily: "Noto Sans KR", fontWeight: "800"}}>
                         영양정보 검색
                     </div>
                     <div className="flex h-24 border-2 border-gray-200 rounded-xl items-center">
@@ -87,11 +87,11 @@ const FoodList = () => {
                         <table className="table-fixed">
                             <thead>
                                 <tr>
-                                    <th className="w-5/12 text-center text-sm">음식(100g당)</th>
-                                    <th className="text-center text-sm">탄수화물(g)</th>
-                                    <th className="text-center text-sm">단백질(g)</th>
-                                    <th className="text-center text-sm">지방(g)</th>
-                                    <th className="text-center text-sm">열량(kcal)</th>
+                                    <th className="w-5/12 text-center text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>음식(100g당)</th>
+                                    <th className="text-center text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>탄수화물(g)</th>
+                                    <th className="text-center text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>단백질(g)</th>
+                                    <th className="text-center text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>지방(g)</th>
+                                    <th className="text-center text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>열량(kcal)</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -135,54 +135,98 @@ const ModalUpdate = ({isOpen, setIsOpen, date, updateFood, dietList, setDietList
     if (updateFood === undefined) return <></>
     else{
         return (
-            <ReactModal isOpen={isOpen} onRequestClose={() => {setIsOpen(false)
+            <ReactModal style={{content: {top: "10%", bottom: "10%", left: "20%", right: "20%"}}} isOpen={isOpen} onRequestClose={() => {setIsOpen(false)
                                                                setIsUpdate(false)}}>
-                <div className="">
-                    <div className="flex">
-                        <div>
-                            음식이름 : 
+                <div className="flex w-full h-full justify-center">
+                    <div className="w-full h-full">
+                        <div className="flex mt-3 h-7">
+                            <div className="mr-2">
+                                음식 : 
+                            </div>
+                            <div>
+                                {updateFood[1].name}
+                            </div>
+                        </div>
+                        <div className="flex h-7">
+                            <div className="mr-2">
+                                시간 :
+                            </div>
+                            <div>
+                                {updateFood[3]}
+                            </div>
+                        </div>
+                        <div className="flex h-7">
+                            <div className="mr-2">
+                                무게 : 
+                            </div>
+                            <div>
+                                {isUpdate ? <input style={{width: "200px", height: "20px"}} ref={gram} type="text" id="gram" name="gram" onChange={handleChangeGram}/> : updateFood[2]}
+                            </div>
                         </div>
                         <div>
-                            {updateFood[1].name}
+                            <div>
+                                comment
+                            </div>
+                            <div>
+                                {isUpdate
+                                ?<textarea ref={comment} id="comment" name="comment" onChange={handleChangeComment} rows="5" cols="33">
+                                </textarea>
+                                :<textarea ref={comment} id="comment" name="comment" rows="5" cols="33" readOnly={true} defaultValue={updateFood[4]}/>
+                                }
+                            </div>
                         </div>
-                    </div>
-                    <div className="flex">
-                        <div>
-                            시간 :
+                        <div className="mt-4">
+                            <table className="table-fixed">
+                                <thead>
+                                    <tr>
+                                        <th className="text-center text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>탄수화물(g)</th>
+                                        <th className="text-center text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>단백질(g)</th>
+                                        <th className="text-center text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>지방(g)</th>
+                                        <th className="text-center text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>열량(kcal)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr key={updateFood[1].id}>
+                                        <td className="text-right text-xs" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>{(updateFood[1].carbohydrates * (updateFood[2] / 100)).toFixed(3)}</td>
+                                        <td className="text-right text-xs" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>{(updateFood[1].protein * (updateFood[2] / 100)).toFixed(3)}</td>
+                                        <td className="text-right text-xs" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>{(updateFood[1].fat * (updateFood[2] / 100)).toFixed(3)}</td>
+                                        <td className="text-right text-xs" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>{(updateFood[1].calorie * (updateFood[2] / 100)).toFixed(3)}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div>
-                            {updateFood[3]}
+                            <table className="table-fixed">
+                                <thead>
+                                    <tr>
+                                        <th className="text-center text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>당류(g)</th>
+                                        <th className="text-center text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>나트륨(mg)</th>
+                                        <th className="text-center text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>콜레스테롤(mg)</th>
+                                        <th className="text-center text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>포화지방산(g)</th>
+                                        <th className="text-center text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>트랜스지방산(g)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr key={updateFood[1].id}>
+                                        <td className="text-right text-xs" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>{(updateFood[1].sugar * (updateFood[2] / 100)).toFixed(3)}</td>
+                                        <td className="text-right text-xs" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>{(updateFood[1].sodium * (updateFood[2] / 100)).toFixed(3)}</td>
+                                        <td className="text-right text-xs" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>{(updateFood[1].cholesterol * (updateFood[2] / 100)).toFixed(3)}</td>
+                                        <td className="text-right text-xs" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>{(updateFood[1].saturatedfattyacids * (updateFood[2] / 100)).toFixed(3)}</td>
+                                        <td className="text-right text-xs" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>{(updateFood[1].transfattyacids * (updateFood[2] / 100)).toFixed(3)}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
-                    <div className="flex">
-                        <div>
-                            그램수 : 
-                        </div>
-                        <div>
-                            {isUpdate ? <input ref={gram} type="text" id="gram" name="gram" onChange={handleChangeGram}/> : updateFood[2]}
-                        </div>
-                    </div>
-                    <div className="">
-                        <div>
-                            comment
-                        </div>
-                        <div>
+                        <div className="flex mt-16 mx-10">
                             {isUpdate
-                            ?<textarea ref={comment} id="comment" name="comment" onChange={handleChangeComment} rows="5" cols="33">
-                            </textarea>
-                            :<textarea ref={comment} id="comment" name="comment" rows="5" cols="33" readOnly={true} defaultValue={updateFood[4]}/>
-                            }
+                                ? <><button onClick={handleConfirm}>확인</button>
+                                    <button onClick={handleCancle}>취소</button></>
+                                : <><button onClick={handleUpdate}>수정</button>
+                                    <button onClick={handleDelete}>삭제</button>
+                                    <button onClick={() => { setIsOpen(false) }}>닫기</button></>}
+
                         </div>
                     </div>
-                </div>
-                <div className="flex">
-                    {isUpdate 
-                    ? <><button onClick={handleConfirm}>확인</button>
-                    <button onClick={handleCancle}>취소</button></>
-                    : <><button onClick={handleUpdate}>수정</button>
-                    <button onClick={handleDelete}>삭제</button>
-                    <button onClick={() => {setIsOpen(false)}}>닫기</button></>}
-                    
                 </div>
             </ReactModal>
         )

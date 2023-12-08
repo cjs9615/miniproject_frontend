@@ -17,9 +17,9 @@ const RouteNav = () => {
 
     return (
         <div className="flex w-screen justify-center bg-nav">
-            <div className="flex w-3/5 justify-between p-4">
-                <div onClick={() => {window.location.replace("/")}}>
-                    Diet
+            <div className="flex w-3/5 justify-between p-4 items-center">
+                <div className="text-index" onClick={() => {window.location.replace("/")}} style={{fontFamily: "Open Sans:", fontStyle: "italic", fontWeight: "700"}}>
+                    Diet Diary
                 </div>
                 <nav>
                     <TailLink href="/searchfood" title="영양정보검색" />

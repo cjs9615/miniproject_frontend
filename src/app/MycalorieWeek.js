@@ -58,7 +58,7 @@ const MycalorieWeek = () => {
 
     useEffect(() => {
         date.current.value = formattedLastWeekOne
-        fetch(SERVER_URL + 'api/private/memberfoodgetall', {
+        fetch(SERVER_URL + 'api/private/memberfoodgetweek', {
             method: 'POST',
             headers: { 'Content-Type':'application/json' },
             body: formattedLastWeekOne + "," + formattedLastWeekSeven + "," + sessionStorage.getItem("username")
@@ -101,11 +101,11 @@ const MycalorieWeek = () => {
                     return i
                 })
                 return  <tr key={item[0]}>
-                            <td className="text-center">{item[0]}</td>
-                            <td className="text-right">{carbohydrates.toFixed(3)}</td>
-                            <td className="text-right">{protein.toFixed(3)}</td>
-                            <td className="text-right">{fat.toFixed(3)}</td>
-                            <td className="text-right">{calorie.toFixed(3)}</td>
+                            <td className="text-center text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>{item[0]}</td>
+                            <td className="text-right text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>{carbohydrates.toFixed(3)}</td>
+                            <td className="text-right text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>{protein.toFixed(3)}</td>
+                            <td className="text-right text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>{fat.toFixed(3)}</td>
+                            <td className="text-right text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>{calorie.toFixed(3)}</td>
                         </tr>
             }
         })
@@ -123,32 +123,35 @@ const MycalorieWeek = () => {
             return item
         })
         setAvgTag(<tr key='avg'>
-                    <td className="text-center">일일평균</td>
-                    <td className="text-right">{(allCarbohydrates/7).toFixed(3)}</td>
-                    <td className="text-right">{(allProtein/7).toFixed(3)}</td>
-                    <td className="text-right">{(allFat/7).toFixed(3)}</td>
-                    <td className="text-right">{(allCalorie/7).toFixed(3)}</td>
+                    <td className="text-center text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>일일평균</td>
+                    <td className="text-right text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>{(allCarbohydrates/7).toFixed(3)}</td>
+                    <td className="text-right text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>{(allProtein/7).toFixed(3)}</td>
+                    <td className="text-right text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>{(allFat/7).toFixed(3)}</td>
+                    <td className="text-right text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>{(allCalorie/7).toFixed(3)}</td>
                 </tr>
         )
     }, [dietList,formattedLastWeekOne,formattedLastWeekTwo,formattedLastWeekThree,formattedLastWeekFour,formattedLastWeekFive,formattedLastWeekSix,formattedLastWeekSeven])
 
     return (
-        <div>
-            <div className="text-center mb-10 font-bold text-4xl">
-                주별 칼로리
-            </div>
-            <div className="mx-96">
-                <div>시작 날짜</div>
-                <input ref={date} type="date" id="date" name="date" onChange={handleChangeDate}/>
-            </div>
-            <table className="table-auto">
+        <div className="flex w-screen h-screen justify-center">
+            <div className="w-3/5 h-full">
+                <div className='mt-5 mb-3 pb-2 border-b-2 border-b-black text-2xl' style={{fontFamily: "Noto Sans KR", fontWeight: "800"}}>
+                    {formattedLastWeekOne} ~ {formattedLastWeekSeven} 영양 정보
+                </div>
+                <div className="flex">
+                    <div className="flex mb-4 ml-5 mr-3 justify-end items-center">시작 날짜 :</div>
+                    <div className="w-3//6">
+                        <input ref={date} type="date" id="date" name="date" onChange={handleChangeDate} />
+                    </div>
+                </div>
+                <table className="table-fixed">
                     <thead>
                         <tr>
-                            <th className="text-center">날짜</th>
-                            <th className="text-center">총 탄수화물(g)</th>
-                            <th className="text-center">총 단백질(g)</th>
-                            <th className="text-center">총 지방(g)</th>
-                            <th className="text-center">총 칼로리(kcal)</th>
+                            <th className="text-center text-sm" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>날짜</th>
+                            <th className="text-center text-sm" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>탄수화물(g)</th>
+                            <th className="text-center text-sm" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>단백질(g)</th>
+                            <th className="text-center text-sm" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>지방(g)</th>
+                            <th className="text-center text-sm" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>열량(kcal)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -156,6 +159,7 @@ const MycalorieWeek = () => {
                         {avgTag}
                     </tbody>
                 </table>
+            </div>
         </div>
     )
 }

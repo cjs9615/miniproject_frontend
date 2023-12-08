@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { SERVER_URL } from "../comm/constants";
-import ButtonBlue from "../comm/ButtonGreen"
+import ButtonGreen from "../comm/ButtonGreen"
 
 const Login = () => {
     const [user, setUser] = useState({
@@ -44,14 +44,14 @@ const Login = () => {
     return (
         <div className="flex w-screen h-screen justify-center">
             <div className="flex w-3/5 h-full justify-center">
-                <div className="w-full bg-white rounded-lg shadow dark:border xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                <div className="w-1/2 h-1/2 mt-20 bg-white rounded-lg shadow dark:border xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                        <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                        <h1 className="text-xl leading-tight tracking-tight text-index md:text-2xl" style={{fontFamily: "Noto Sans KR", fontWeight: "800"}}>
                             로그인
                         </h1>
                         <div className="space-y-4 md:space-y-6">
                             <div>
-                                <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>
                                     아이디
                                 </label>
                                 <input type="username"
@@ -61,7 +61,7 @@ const Login = () => {
                                     onChange={handleChange}/>
                             </div>
                             <div>
-                                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>
                                     비밀번호
                                 </label>
                                 <input type="password"
@@ -71,7 +71,7 @@ const Login = () => {
                                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" 
                                     onChange={handleChange}/>
                             </div>
-                            <ButtonBlue caption="로그인" handleClick={login} />
+                            <ButtonGreen caption="로그인" handleClick={login} />
                         </div>
                     </div>
                 </div>

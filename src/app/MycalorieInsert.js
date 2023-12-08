@@ -121,8 +121,8 @@ const MycalorieInsert = () => {
         <div className="flex w-screen h-screen justify-center">
             <div className="w-3/5 h-full">
                 <div className="h-1/4">
-                    <div className='mt-5 mb-3 pb-2 border-b-2 border-b-black text-2xl' style={{fontFamily: "Noto Sans KR"}}>
-                        내 식단 입력
+                    <div className='mt-5 mb-3 pb-2 border-b-2 border-b-black text-2xl' style={{fontFamily: "Noto Sans KR", fontWeight: "800"}}>
+                        {date.current === undefined ? '' : date.current.value} 식단 입력
                     </div>
                     <div className="border-2 border-gray-200 rounded-xl">
                         <div className="flex ml-2 mt-3 items-center">
@@ -131,25 +131,23 @@ const MycalorieInsert = () => {
                             </div>
                         </div>
                         <div className="flex ml-2 items-center">
-                            <div className="flex w-1/5">
-                                <div>
-                                    <input ref={time} type="time" id="time" name="time" onChange={handleChangeTime}/>
-                                </div>
+                            <div className="flex w-2/12">
+                                <input ref={time} type="time" id="time" name="time" onChange={handleChangeTime}/>
                             </div>
-                            <div className="flex w-3/12 mr-2">
-                                <div className="flex mb-3 w-1/3 items-center justify-center">음식</div>
-                                <div className="w-2/3">
+                            <div className="flex w-5/12 mr-6">
+                                <div className="flex mb-3 mr-1 w-1/5 items-center justify-end">음식: </div>
+                                <div className="w-4/5">
                                     <input ref={foodName} type="text" id="name" name="name" placeholder="클릭하세요" readOnly onClick={handleClickName}/>
                                     <ModalSearch isOpen={isSearchOpen} setIsOpen={setIsSearchOpen} foodName={foodName} memberFood={memberFood} setMemberFood={setMemberFood} setInsertFood={setInsertFood}/>
                                 </div>
                             </div>
                             <div className="flex w-3/12 mr-2">
-                                <div className="flex mb-3 w-1/3 items-center justify-center">그램</div>
-                                <div className="w-2/3">
+                                <div className="flex mb-3 mr-1 w-1/5 items-center justify-center">무게:</div>
+                                <div className="w-4/5">
                                     <input ref={gram} type="text" id="gram" name="gram" onChange={handleChangeGram}/>
                                 </div>
                             </div>
-                            <div className="flex w-1/12">
+                            <div className="flex mb-4 w-1/12 items-center justify-center">
                                 <ButtonBlue caption='추가' handleClick={foodInsert}/>
                             </div>
                         </div>

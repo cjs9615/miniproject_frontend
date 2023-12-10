@@ -23,7 +23,7 @@ const Login = () => {
         .then(Response => {
             const jwtToken = Response.headers.get('Authorization');
             if (jwtToken !== null) {
-                sessionStorage.setItem("jwt", jwtToken);
+                sessionStorage.setItem("token", jwtToken);
                 sessionStorage.setItem("username", user.username)
                 setAuth(true);
             }

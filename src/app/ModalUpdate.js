@@ -2,6 +2,7 @@ import ReactModal from "react-modal"
 import { SERVER_URL } from "../comm/constants"
 import { useState,useEffect, useRef } from "react"
 const ModalUpdate = ({isOpen, setIsOpen, date, updateFood, dietList, setDietList}) => {
+    const token = sessionStorage.getItem("token")
     const [memberFood, setMemberFood] = useState({
         date: '',
         time: '',
@@ -20,7 +21,8 @@ const ModalUpdate = ({isOpen, setIsOpen, date, updateFood, dietList, setDietList
         if (window.confirm("삭제하시겠습니까?")) {
             fetch(SERVER_URL + 'api/private/memberfooddelete', {
                 method: 'DELETE',
-                headers: { 'Content-Type':'application/json' },
+                headers: { 'Content-Type':'application/json' ,
+                            "Authorization" : token },
                 body: JSON.stringify(memberFood)
             })
             .then(Response => {
@@ -50,7 +52,8 @@ const ModalUpdate = ({isOpen, setIsOpen, date, updateFood, dietList, setDietList
         if (window.confirm("수정하시겠습니까?")) {
             fetch(SERVER_URL + 'api/private/memberfoodupdate', {
                 method: 'PUT',
-                headers: { 'Content-Type':'application/json' },
+                headers: { 'Content-Type':'application/json' ,
+                            "Authorization" : token },
                 body: JSON.stringify({
                     date: memberFood['date'],
                     time: memberFood['time'],
@@ -106,6 +109,7 @@ const ModalUpdate = ({isOpen, setIsOpen, date, updateFood, dietList, setDietList
     }
 
     const handleCancle = () => {
+        comment.current.value = updateFood[4]
         setIsUpdate(false)
     }
 
@@ -157,7 +161,7 @@ const ModalUpdate = ({isOpen, setIsOpen, date, updateFood, dietList, setDietList
                         </div>
                         <div className="flex h-7">
                             <div className="mr-2">
-                                무게 : 
+                                무게(g) : 
                             </div>
                             <div>
                                 {isUpdate ? <input style={{width: "200px", height: "20px"}} ref={gram} type="text" id="gram" name="gram" onChange={handleChangeGram}/> : updateFood[2]}
@@ -171,7 +175,7 @@ const ModalUpdate = ({isOpen, setIsOpen, date, updateFood, dietList, setDietList
                                 {isUpdate
                                 ?<textarea ref={comment} id="comment" name="comment" onChange={handleChangeComment} rows="5" cols="33">
                                 </textarea>
-                                :<textarea ref={comment} id="comment" name="comment" rows="5" cols="33" readOnly={true} defaultValue={updateFood[4]}/>
+                                :<textarea id="commentReadOnly" name="commentReadOnly" rows="5" cols="33" readOnly={true} defaultValue={updateFood[4]}/>
                                 }
                             </div>
                         </div>

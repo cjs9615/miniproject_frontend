@@ -2,9 +2,11 @@ import { useState, useEffect, useRef } from "react";
 import { SERVER_URL } from "../comm/constants";
 
 const MycalorieWeek = () => {
+    const token = sessionStorage.getItem("token")
     const today = new Date();
     const [dietList, setDietList] = useState([])
     const [weekTag, setWeekTag] = useState()
+    const [sumTag, setSumTag] = useState()
     const [avgTag, setAvgTag] = useState()
 
     const date = useRef()
@@ -57,16 +59,21 @@ const MycalorieWeek = () => {
     }
 
     useEffect(() => {
+        if(!token){
+            window.location.replace("/login")
+            return
+        }
         date.current.value = formattedLastWeekOne
         fetch(SERVER_URL + 'api/private/memberfoodgetweek', {
             method: 'POST',
-            headers: { 'Content-Type':'application/json' },
+            headers: { 'Content-Type':'application/json' ,
+                        "Authorization" : token },
             body: formattedLastWeekOne + "," + formattedLastWeekSeven + "," + sessionStorage.getItem("username")
         })
         .then(Response => Response.json())
         .then((data) => setDietList(data))
         .catch(err => console.error(err))
-    }, [formattedLastWeekOne, formattedLastWeekSeven])
+    }, [formattedLastWeekOne, formattedLastWeekSeven, token])
 
     useEffect(() => {
         const week = [formattedLastWeekOne,formattedLastWeekTwo,formattedLastWeekThree,formattedLastWeekFour,formattedLastWeekFive,formattedLastWeekSix,formattedLastWeekSeven]
@@ -122,6 +129,14 @@ const MycalorieWeek = () => {
             allCalorie += item[1].calorie * gram
             return item
         })
+        setSumTag(<tr key='sum'>
+                    <td className="text-center text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>총합</td>
+                    <td className="text-right text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>{allCarbohydrates.toFixed(3)}</td>
+                    <td className="text-right text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>{allProtein.toFixed(3)}</td>
+                    <td className="text-right text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>{allFat.toFixed(3)}</td>
+                    <td className="text-right text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>{allCalorie.toFixed(3)}</td>
+                </tr>
+        )
         setAvgTag(<tr key='avg'>
                     <td className="text-center text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>일일평균</td>
                     <td className="text-right text-sm" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>{(allCarbohydrates/7).toFixed(3)}</td>
@@ -134,6 +149,7 @@ const MycalorieWeek = () => {
 
     return (
         <div className="flex w-screen h-screen justify-center">
+            {!token ? <></> :
             <div className="w-3/5 h-full">
                 <div className='mt-5 mb-3 pb-2 border-b-2 border-b-black text-2xl' style={{fontFamily: "Noto Sans KR", fontWeight: "800"}}>
                     {formattedLastWeekOne} ~ {formattedLastWeekSeven} 영양 정보
@@ -156,10 +172,12 @@ const MycalorieWeek = () => {
                     </thead>
                     <tbody>
                         {weekTag}
+                        {sumTag}
                         {avgTag}
                     </tbody>
                 </table>
             </div>
+            }
         </div>
     )
 }

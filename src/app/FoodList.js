@@ -100,8 +100,8 @@ const FoodList = () => {
                         </table>
                     </div>
                 </div>
-                <div className="h-1/5">
-                    {<Paging page={page} count={foodList.length} setPage={handlePageChange}/>}
+                <div className="h-1/5 mt-3">
+                    {<Paging page={page} countPerPage={10} count={foodList.length} setPage={handlePageChange}/>}
                 </div>
             </div>
         </div>

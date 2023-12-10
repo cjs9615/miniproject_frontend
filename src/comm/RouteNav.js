@@ -1,15 +1,15 @@
 import TailLink from "./TailLink";
 const RouteNav = () => {
-    const jwt = sessionStorage.getItem("jwt")
+    const token = sessionStorage.getItem("token")
 
     const authen = () => {
-        alert("로그인하세요")
+        alert("로그인이 필요한 서비스입니다.")
         window.location.replace("/login")
     }
 
     const logout = () => {
         if (window.confirm("로그아웃하시겠습니까?")) {
-            sessionStorage.removeItem("jwt")
+            sessionStorage.removeItem("token")
             sessionStorage.removeItem("username")
             window.location.replace("/")
         } else {}
@@ -23,7 +23,7 @@ const RouteNav = () => {
                 </div>
                 <nav>
                     <TailLink href="/searchfood" title="영양정보검색" />
-                    {jwt === null 
+                    {token === null 
                     ?<><TailLink title="나의식단" handleClick={authen}/>
                     <TailLink href="/login" title="로그인"/>
                     <TailLink href="/signup" title="회원가입"/></>

@@ -81,7 +81,7 @@ const Modal = ({isOpen, setIsOpen, foodName, memberFood, setMemberFood, setInser
                             />
                         </div>
                     </div>
-                    <div className="mt-1 h-3/6">
+                    <div className="mt-1 h-3/5">
                         <div className="h-5/6">
                             <table className="table-fixed">
                                 <thead>
@@ -99,9 +99,9 @@ const Modal = ({isOpen, setIsOpen, foodName, memberFood, setMemberFood, setInser
                             </table>
                         </div>
                     </div>
-                    <div className="mt-12 h-1/6">
+                    <div className="h-1/6">
                         <div>
-                            {<Paging page={page} count={count} setPage={handlePageChange}/>}
+                            {<Paging page={page} countPerPage={10} count={count} setPage={handlePageChange}/>}
                         </div>
                         <div className="mt-8 mx-40">
                             <button onClick={() => setIsOpen(false)}>닫기</button>

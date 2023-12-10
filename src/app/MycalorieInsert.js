@@ -69,15 +69,15 @@ const MycalorieInsert = () => {
     const foodInsert = () => {
         let isDuplicate = false
         if(time.current.value === undefined || time.current.value === ''){
-            alert('시간을 입력해주세요')
+            alert('시간이 입력되지 않았습니다.')
             return
         }
         if(foodName.current.value === undefined || foodName.current.value === ''){
-            alert('음식이름을 입력해주세요')
+            alert('음식이름이 입력되지 않았습니다.')
             return
         }
         if(isNaN(gram.current.value) || gram.current.value === ''){
-            alert('무게는 숫자만 입력가능합니다')
+            alert('무게는 숫자만 입력가능합니다.')
             return
         }
         dietList.map((item) => {if(time.current.value === item[3] && foodName.current.value === item[1].name){
@@ -147,7 +147,7 @@ const MycalorieInsert = () => {
         <div className="flex w-screen h-screen justify-center">
             {!token ? <></> :
             <div className="w-3/5 h-full">
-                <div className="h-1/4">
+                <div className="h-2/6">
                     <div className='mt-5 mb-3 pb-2 border-b-2 border-b-black text-2xl' style={{fontFamily: "Noto Sans KR", fontWeight: "800"}}>
                         {date.current === undefined ? '' : date.current.value} 식단 입력
                     </div>
@@ -180,7 +180,7 @@ const MycalorieInsert = () => {
                         </div>
                     </div>
                 </div>
-                <div className="mt-5 h-1/3">
+                <div className="h-1/3">
                     <table className="table-fixed">
                         <thead>
                             <tr>

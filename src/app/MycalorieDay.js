@@ -19,6 +19,8 @@ const MycalorieDay = () => {
     const indexOfFirstPost = indexOfLastPost - postPerPage
     const [isUpdateOpen, setIsUpdateOpen] = useState(false)
     const [updateFood, setUpdateFood] = useState()
+    const [calorieTag, setCalorieTag] = useState()
+    const [detailTag, setDetailTag] = useState()
 
     const handleChangeDate = (event) => {
         fetch(SERVER_URL + 'api/private/memberfoodget', {
@@ -52,6 +54,49 @@ const MycalorieDay = () => {
         .then((data) => setDietList(data))
         .catch(err => console.error(err))
     }, [formattedDate, token])
+
+    useEffect(() => {
+        let allCarbohydrates = 0
+        let allProtein = 0
+        let allFat = 0
+        let allCalorie = 0
+        let allSugar = 0
+        let allSodium = 0
+        let allCholesterol = 0
+        let allSaturatedfattyacids = 0
+        let allTransfattyacids = 0
+        dietList
+        .map((item) => {
+            let gram = item[2] / 100
+            allCarbohydrates += item[1].carbohydrates * gram
+            allProtein += item[1].protein * gram
+            allFat += item[1].fat * gram
+            allCalorie += item[1].calorie * gram
+            allSugar += item[1].sugar * gram
+            allSodium += item[1].sodium * gram
+            allCholesterol += item[1].cholesterol * gram
+            allSaturatedfattyacids += item[1].saturatedfattyacids * gram
+            allTransfattyacids += item[1].transfattyacids * gram
+            return item
+        })
+        setCalorieTag(
+            <tr key='calorie'>
+                <td className="text-right text-xs" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>{allCarbohydrates.toFixed(3)}</td>
+                <td className="text-right text-xs" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>{allProtein.toFixed(3)}</td>
+                <td className="text-right text-xs" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>{allFat.toFixed(3)}</td>
+                <td className="text-right text-xs" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>{allCalorie.toFixed(3)}</td>
+            </tr>
+        )
+        setDetailTag(
+            <tr key='detail'>
+                <td className="text-right text-xs" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>{allSugar.toFixed(3)}</td>
+                <td className="text-right text-xs" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>{allSodium.toFixed(3)}</td>
+                <td className="text-right text-xs" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>{allCholesterol.toFixed(3)}</td>
+                <td className="text-right text-xs" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>{allSaturatedfattyacids.toFixed(3)}</td>
+                <td className="text-right text-xs" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>{allTransfattyacids.toFixed(3)}</td>
+            </tr>
+        )
+    }, [dietList])
 
     useEffect(() => {
         setCurrentPosts(dietList.slice(indexOfFirstPost, indexOfLastPost));
@@ -103,6 +148,37 @@ const MycalorieDay = () => {
                 </div>
                 <div>
                     {<Paging page={page} countPerPage={5} count={dietList.length} setPage={handlePageChange}/>}
+                </div>
+                <div>
+                    <table className="mt-4 table-fixed">
+                        <thead>
+                            <tr>
+                                <th className="text-center text-sm" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>총 탄수화물(g)</th>
+                                <th className="text-center text-sm" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>총 단백질(g)</th>
+                                <th className="text-center text-sm" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>총 지방(g)</th>
+                                <th className="text-center text-sm" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>총 열량(kcal)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {calorieTag}
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <table className="table-fixed">
+                        <thead>
+                            <tr>
+                                <th className="text-center text-sm" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>총 당류(g)</th>
+                                <th className="text-center text-sm" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>총 나트륨(mg)</th>
+                                <th className="text-center text-sm" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>총 콜레스테롤(mg)</th>
+                                <th className="text-center text-sm" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>총 포화지방산(g)</th>
+                                <th className="text-center text-sm" style={{ fontFamily: "Noto Sans KR", fontWeight: "400" }}>총 트랜스지방산(g)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {detailTag}
+                        </tbody>
+                    </table>
                 </div>
             </div>
             }

@@ -27,7 +27,7 @@ const Signup = () => {
 
     const handleCheckDouble = () => {
         if(member.username === '') {
-            alert('아이디를 입력하세요')
+            alert('아이디가 입력되지 않았습니다.')
             return
         }
         fetch(SERVER_URL + 'api/public/checkdouble', {
@@ -89,7 +89,7 @@ const Signup = () => {
 
     const signupSuccess = () => {
         if(!isdouble){
-            alert('아이디 중복 확인하세요')
+            alert('아이디 중복이 확인되지 않았습니다.')
         }
         else if(checkpassword !== member.password){
             alert('비밀번호가 일치하지 않습니다.')

@@ -19,7 +19,7 @@ const FoodList = () => {
 
     const search = () => {
         if(keyword === ''){
-            alert('키워드를 입력하세요')
+            alert('키워드가 입력되지 않았습니다.')
             return
         }
         fetch(SERVER_URL + 'api/public/search', {

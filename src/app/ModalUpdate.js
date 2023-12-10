@@ -46,7 +46,7 @@ const ModalUpdate = ({isOpen, setIsOpen, date, updateFood, dietList, setDietList
             return
         }
         if(foodGram !== undefined && (isNaN(foodGram) || foodGram === '')){
-            alert('그램에 숫자를 입력하세요')
+            alert('무게는 숫자만 입력이 가능합니다.')
             return
         }
         if (window.confirm("수정하시겠습니까?")) {

@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import TailLink from "./TailLink";
+import { CgProfile } from "react-icons/cg";
 const RouteNav = () => {
     const token = sessionStorage.getItem("token")
 
@@ -29,7 +31,12 @@ const RouteNav = () => {
                     <TailLink href="/signup" title="회원가입"/></>
                     :<><TailLink href="/mycalorie" title="나의식단"/>
                     <TailLink title="로그아웃" handleClick={logout}/>
-                    <TailLink href="/profile" title="프로필"/></>}
+                    <Link to="/profile" style={{fontFamily: "Noto Sans KR", fontWeight: "800"}} className="text-index hover:text-red-600 p-2 m-2">
+                        <div>
+                            <CgProfile/>
+                        </div>
+                    </Link>
+                    </>}
                 </nav>
             </div>
         </div>

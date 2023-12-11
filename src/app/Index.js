@@ -1,6 +1,6 @@
 import React from 'react'
 //import vegetable from '../img/vegetable.jpg'
-import salad  from '../img/salad1.png'
+import salad  from '../img/salad.png'
 
 // const StyledComponentWithBackground = styled.div`
 //   background-image: url(${vegetable});

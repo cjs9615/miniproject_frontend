@@ -93,7 +93,7 @@ const Profile = () => {
         height.current.value = profile[0][1]
         weight.current.value = profile[0][2]
         if(profile[0][0] === 'M') setIsMale(true)
-        else setIsFemale(true)
+        else if(profile[0][0] === 'F') setIsFemale(true)
     }, [isUpdate, profile])
     
     return (

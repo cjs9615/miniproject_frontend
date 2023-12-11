@@ -16,7 +16,7 @@ const Index = () => {
         <div className='w-screen h-screen'>
             <div className='flex flex-col items-center'>
                 <div className='flex flex-col w-3/5'>
-                    <div className='flex mt-20 text-green-900 justify-center text-4xl' style={{fontFamily: "Open Sans"}}>
+                    <div className='flex mt-20 my-2 text-green-900 justify-center text-6xl' style={{fontFamily: "Open Sans"}}>
                         Diet Diary
                     </div>
                     <img src={salad} alt='salad'/>

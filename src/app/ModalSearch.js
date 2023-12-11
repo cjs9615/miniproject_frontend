@@ -101,7 +101,9 @@ const Modal = ({isOpen, setIsOpen, foodName, memberFood, setMemberFood, setInser
                     </div>
                     <div className="h-1/6">
                         <div>
-                            {<Paging page={page} countPerPage={10} count={count} setPage={handlePageChange}/>}
+                            {foodList.length <= 10
+                            ? <></>
+                            :<Paging page={page} countPerPage={10} count={count} setPage={handlePageChange}/>}
                         </div>
                         <div className="mt-8 mx-40">
                             <button onClick={() => setIsOpen(false)}>닫기</button>

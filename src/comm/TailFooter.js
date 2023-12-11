@@ -1,7 +1,6 @@
 const TailFooter = () => {
     return (
-        <div>
-            footer
+        <div className="w-full h-10 bg-green-800">
         </div>
     )
 }

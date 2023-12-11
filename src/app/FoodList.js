@@ -67,7 +67,7 @@ const FoodList = () => {
         <div className="flex w-screen h-screen justify-center">
             <div className="w-3/5 h-full">
                 <div className="h-1/5">
-                    <div className='mt-5 mb-3 pb-2 border-b-2 border-b-black text-2xl' style={{fontFamily: "Noto Sans KR", fontWeight: "800"}}>
+                    <div className='mt-16 mb-3 pb-2 border-b-2 border-b-black text-2xl' style={{fontFamily: "Noto Sans KR", fontWeight: "800"}}>
                         영양정보 검색
                     </div>
                     <div className="flex h-24 border-2 border-gray-200 rounded-xl items-center">
@@ -101,7 +101,9 @@ const FoodList = () => {
                     </div>
                 </div>
                 <div className="h-1/5 mt-3">
-                    {<Paging page={page} countPerPage={10} count={foodList.length} setPage={handlePageChange}/>}
+                    {foodList.length <= 10
+                    ?<></>
+                    :<Paging page={page} countPerPage={10} count={foodList.length} setPage={handlePageChange}/>}
                 </div>
             </div>
         </div>

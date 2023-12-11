@@ -151,7 +151,7 @@ const MycalorieWeek = () => {
         <div className="flex w-screen h-screen justify-center">
             {!token ? <></> :
             <div className="w-3/5 h-full">
-                <div className='mt-5 mb-3 pb-2 border-b-2 border-b-black text-2xl' style={{fontFamily: "Noto Sans KR", fontWeight: "800"}}>
+                <div className='mt-16 mb-3 pb-2 border-b-2 border-b-black text-2xl' style={{fontFamily: "Noto Sans KR", fontWeight: "800"}}>
                     {formattedLastWeekOne} ~ {formattedLastWeekSeven} 영양 정보
                 </div>
                 <div className="flex">

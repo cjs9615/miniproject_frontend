@@ -122,7 +122,7 @@ const MycalorieDay = () => {
         <div className="flex w-screen h-screen justify-center">
             {!token ? <></> :
             <div className="w-3/5 h-full">
-                <div className='mt-5 mb-3 pb-2 border-b-2 border-b-black text-2xl' style={{fontFamily: "Noto Sans KR", fontWeight: "800"}}>
+                <div className='mt-16 mb-3 pb-2 border-b-2 border-b-black text-2xl' style={{fontFamily: "Noto Sans KR", fontWeight: "800"}}>
                     {date.current === undefined ? '' : date.current.value} 영양 정보
                 </div>
                 <div className="flex">
@@ -131,7 +131,7 @@ const MycalorieDay = () => {
                         <input ref={date} type="date" id="date" name="date" onChange={handleChangeDate} />
                     </div>
                 </div>
-                <div className="h-1/3">
+                <div className="">
                     <table className="table-auto">
                         <thead>
                             <tr>
@@ -147,7 +147,9 @@ const MycalorieDay = () => {
                     {date.current === undefined ? <></> : <ModalUpdate isOpen={isUpdateOpen} setIsOpen={setIsUpdateOpen} date={date} updateFood={updateFood} dietList={dietList} setDietList={setDietList}/>}
                 </div>
                 <div>
-                    {<Paging page={page} countPerPage={5} count={dietList.length} setPage={handlePageChange}/>}
+                    {dietList.length <= 5
+                    ? <div className="h-10"></div> 
+                    :<Paging page={page} countPerPage={5} count={dietList.length} setPage={handlePageChange}/>}
                 </div>
                 <div>
                     <table className="mt-4 table-fixed">

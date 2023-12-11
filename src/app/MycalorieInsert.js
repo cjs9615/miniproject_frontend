@@ -148,7 +148,7 @@ const MycalorieInsert = () => {
             {!token ? <></> :
             <div className="w-3/5 h-full">
                 <div className="h-2/6">
-                    <div className='mt-5 mb-3 pb-2 border-b-2 border-b-black text-2xl' style={{fontFamily: "Noto Sans KR", fontWeight: "800"}}>
+                    <div className='mt-16 mb-3 pb-2 border-b-2 border-b-black text-2xl' style={{fontFamily: "Noto Sans KR", fontWeight: "800"}}>
                         {date.current === undefined ? '' : date.current.value} 식단 입력
                     </div>
                     <div className="border-2 border-gray-200 rounded-xl">
@@ -195,7 +195,9 @@ const MycalorieInsert = () => {
                     </table>
                     {date.current === undefined ? <></> : <ModalUpdate isOpen={isUpdateOpen} setIsOpen={setIsUpdateOpen} date={date} updateFood={updateFood} dietList={dietList} setDietList={setDietList}/>}
                 </div>
-                {<Paging page={page} countPerPage={5} count={dietList.length} setPage={handlePageChange}/>}
+                {dietList.length <= 5
+                ?<></>
+                :<Paging page={page} countPerPage={5} count={dietList.length} setPage={handlePageChange}/>}
             </div>
         }   
         </div>

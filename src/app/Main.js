@@ -1,5 +1,3 @@
-import TailFooter from "../comm/TailFooter"
-
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import RouteNav from "../comm/RouteNav"
 import Login from "./Login"
@@ -33,7 +31,6 @@ const Main = () => {
                         <Route path="/profile" element={<Profile/>}/>
                     </Routes>
                 </div>
-                <TailFooter />
             </div>
         </BrowserRouter>
     )

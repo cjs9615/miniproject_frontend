@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import TailLink from "./TailLink";
 import { CgProfile } from "react-icons/cg";
 const RouteNav = () => {
@@ -23,6 +22,11 @@ const RouteNav = () => {
                 <div className="text-index" onClick={() => {window.location.replace("/")}} style={{fontFamily: "Open Sans:", fontStyle: "italic", fontWeight: "700"}}>
                     Diet Diary
                 </div>
+                <div className="w-1/3 text-xs" style={{fontFamily: "Open Sans:", fontWeight: "400"}}>
+                    {sessionStorage.getItem("username") === null
+                    ?<></>
+                    :sessionStorage.getItem("username") + "님 환영합니다"} 
+                </div>
                 <nav>
                     <TailLink href="/searchfood" title="영양정보검색" />
                     {token === null 
@@ -31,12 +35,7 @@ const RouteNav = () => {
                     <TailLink href="/signup" title="회원가입"/></>
                     :<><TailLink href="/mycalorie" title="나의식단"/>
                     <TailLink title="로그아웃" handleClick={logout}/>
-                    <Link to="/profile" style={{fontFamily: "Noto Sans KR", fontWeight: "800"}} className="text-index hover:text-red-600 p-2 m-2">
-                        <div>
-                            <CgProfile/>
-                        </div>
-                    </Link>
-                    </>}
+                    <TailLink href="/profile" title={<CgProfile size={30}/>}/></>}
                 </nav>
             </div>
         </div>

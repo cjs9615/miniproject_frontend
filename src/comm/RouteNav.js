@@ -22,7 +22,7 @@ const RouteNav = () => {
                 <div className="text-index" onClick={() => {window.location.replace("/")}} style={{fontFamily: "Open Sans:", fontStyle: "italic", fontWeight: "700"}}>
                     Diet Diary
                 </div>
-                <div className="w-1/3 text-xs" style={{fontFamily: "Open Sans:", fontWeight: "400"}}>
+                <div className="flex justify-center w-1/3 text-xs" style={{fontFamily: "Open Sans:", fontWeight: "400"}}>
                     {sessionStorage.getItem("username") === null
                     ?<></>
                     :sessionStorage.getItem("username") + "님 환영합니다"} 

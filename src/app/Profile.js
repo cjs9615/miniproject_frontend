@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react"
-import ButtonGreen from "../comm/ButtonGreen"
+import ButtonGray from "../comm/ButtonGray"
 import { SERVER_URL } from "../comm/constants"
 const Profile = () => {
     const token = sessionStorage.getItem("token")
@@ -102,7 +102,7 @@ const Profile = () => {
             <div className="flex w-3/5 h-full justify-center">
                 <div className="w-1/2 h-2/5 mt-20 bg-white rounded-lg shadow dark:border dark:bg-gray-800 dark:border-gray-700">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                        <h1 className="text-xl leading-tight tracking-tight text-index md:text-2xl" style={{fontFamily: "Noto Sans KR", fontWeight: "800"}}>
+                        <h1 className="text-2xl" style={{fontFamily: "Noto Sans KR", fontWeight: "800"}}>
                             내 정보
                         </h1>
                         <div className="space-y-4 md:space-y-6">
@@ -161,10 +161,10 @@ const Profile = () => {
                             </div>
                             {isUpdate
                             ?<div className="flex">
-                                <ButtonGreen caption="확인" handleClick={handleConfirm} />
-                                <ButtonGreen caption="취소" handleClick={handleCancle} />
+                                <ButtonGray caption="확인" handleClick={handleConfirm} />
+                                <ButtonGray caption="취소" handleClick={handleCancle} />
                             </div>
-                            :<ButtonGreen caption="수정" handleClick={handleUpdate} />
+                            :<ButtonGray caption="수정" handleClick={handleUpdate} />
                             }
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SERVER_URL } from "../comm/constants";
-import ButtonBlue from "../comm/ButtonGreen"
+import ButtonGray from "../comm/ButtonGray"
 const Signup = () => {
     const [member, setMember] = useState({
         username: '',
@@ -114,12 +114,12 @@ const Signup = () => {
             <div className="flex w-3/5 h-full justify-center">
                 <div className="w-1/2 h-3/4 mt-10 bg-white rounded-lg shadow dark:border dark:bg-gray-800 dark:border-gray-700">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                        <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                        <h1 className="text-xl font-bold leading-tight tracking-tight md:text-2xl dark:text-white" style={{fontFamily: "Noto Sans KR", fontWeight: "800"}}>
                             회원가입
                         </h1>
                         <div className="space-y-4 md:space-y-6">
                             <div>
-                                <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">아이디</label>
+                                <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>아이디</label>
                                 <input type="username"
                                     name="username"
                                     id="username"
@@ -128,10 +128,10 @@ const Signup = () => {
                                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                                     onChange={handleIdChange}/>
                             </div>
-                            <ButtonBlue caption="중복확인" handleClick={handleCheckDouble} />
+                            <ButtonGray caption="중복확인" handleClick={handleCheckDouble} />
                             {doubletag}
                             <div>
-                                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">비밀번호</label>
+                                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>비밀번호</label>
                                 <input type="password"
                                     name="password"
                                     id="password"
@@ -140,7 +140,7 @@ const Signup = () => {
                                     onChange={handlePwChange}/>
                             </div>
                             <div>
-                                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">비밀번호 확인</label>
+                                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" style={{fontFamily: "Noto Sans KR", fontWeight: "400"}}>비밀번호 확인</label>
                                 <input type="password"
                                     name="checkpassword"
                                     id="checkpassword"
@@ -148,7 +148,7 @@ const Signup = () => {
                                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" 
                                     onChange={handleCheckPassword}/>
                             </div>
-                            <ButtonBlue caption="가입완료" handleClick={signupSuccess} />
+                            <ButtonGray caption="가입완료" handleClick={signupSuccess} />
                         </div>
                     </div>
                 </div>

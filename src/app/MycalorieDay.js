@@ -123,7 +123,7 @@ const MycalorieDay = () => {
             {!token ? <></> :
             <div className="w-3/5 h-full">
                 <div className='mt-16 mb-3 pb-2 border-b-2 border-b-black text-2xl' style={{fontFamily: "Noto Sans KR", fontWeight: "800"}}>
-                    {date.current === undefined ? '' : date.current.value} 영양 정보
+                    {date.current === undefined ? '' : date.current.value} 영양 성분
                 </div>
                 <div className="flex">
                     <div className="flex mb-4 ml-5 mr-3 justify-end items-center">날짜 :</div>

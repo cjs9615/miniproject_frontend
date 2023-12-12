@@ -1,6 +1,7 @@
 import ReactModal from "react-modal"
 import { SERVER_URL } from "../comm/constants"
 import { useState,useEffect, useRef } from "react"
+import ButtonGray from "../comm/ButtonGray"
 const ModalUpdate = ({isOpen, setIsOpen, date, updateFood, dietList, setDietList}) => {
     const token = sessionStorage.getItem("token")
     const [memberFood, setMemberFood] = useState({
@@ -223,12 +224,12 @@ const ModalUpdate = ({isOpen, setIsOpen, date, updateFood, dietList, setDietList
                         </div>
                         <div className="flex mt-16 mx-10">
                             {isUpdate
-                                ? <><button onClick={handleConfirm}>확인</button>
-                                    <button onClick={handleCancle}>취소</button></>
-                                : <><button onClick={handleUpdate}>수정</button>
-                                    <button onClick={handleDelete}>삭제</button>
-                                    <button onClick={() => { setIsOpen(false) }}>닫기</button></>}
-
+                                ? <><ButtonGray caption='확인' handleClick={handleConfirm}/>
+                                    <ButtonGray caption='취소' handleClick={handleCancle}/></>
+                                : <><ButtonGray caption='수정' handleClick={handleUpdate}/>
+                                    <ButtonGray caption='삭제' handleClick={handleDelete}/>
+                                    <ButtonGray caption='닫기' handleClick={() => { setIsOpen(false) }}/>
+                                </>}
                         </div>
                     </div>
                 </div>

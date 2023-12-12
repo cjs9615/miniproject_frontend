@@ -68,7 +68,7 @@ const FoodList = () => {
             <div className="w-3/5 h-full">
                 <div className="h-1/5">
                     <div className='mt-16 mb-3 pb-2 border-b-2 border-b-black text-2xl' style={{fontFamily: "Noto Sans KR", fontWeight: "800"}}>
-                        영양정보 검색
+                        영양성분 검색
                     </div>
                     <div className="flex h-24 border-2 border-gray-200 rounded-xl items-center">
                         <input className="ml-14 mt-5 w-5/6 h-1/2" 

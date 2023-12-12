@@ -36,7 +36,7 @@ const Mycalorie = () => {
                         <CircleButton name="내 식단 입력" color="#AEC3AE" background="white" handleClick={handleClickInsert}/>
                     </div>
                     <div className="flex w-1/2 justify-center items-center" style={{fontFamily: "Noto Sans KR", fontWeight: "800"}}>
-                        <CircleButton name="내가 섭취한 칼로리(일별/주별/월별)" color="#EEC759" background="white" handleClick={handleClickView}/>
+                        <CircleButton name="내가 섭취한 영양성분(일별/주별)" color="#EEC759" background="white" handleClick={handleClickView}/>
                     </div>
                 </div>
             }

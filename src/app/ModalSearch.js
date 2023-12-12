@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ReactModal from "react-modal"
 import { SERVER_URL } from "../comm/constants";
 import Paging from "../comm/Paging";
+import ButtonGray from "../comm/ButtonGray";
 const Modal = ({isOpen, setIsOpen, foodName, memberFood, setMemberFood, setInsertFood}) => {
     const [foodList, setFoodList] = useState([]);
     const [foodTag, setFoodTag] = useState();
@@ -106,7 +107,7 @@ const Modal = ({isOpen, setIsOpen, foodName, memberFood, setMemberFood, setInser
                             :<Paging page={page} countPerPage={10} count={count} setPage={handlePageChange}/>}
                         </div>
                         <div className="mt-8 mx-40">
-                            <button onClick={() => setIsOpen(false)}>닫기</button>
+                            <ButtonGray caption='닫기' handleClick={() => setIsOpen(false)}/>
                         </div>
                     </div>
                 </div>

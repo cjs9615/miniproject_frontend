@@ -1,5 +1,6 @@
 import TailLink from "./TailLink";
 import { CgProfile } from "react-icons/cg";
+import {ReactComponent as Logo} from "../img/logo.svg"
 const RouteNav = () => {
     const token = sessionStorage.getItem("token")
 
@@ -19,16 +20,16 @@ const RouteNav = () => {
     return (
         <div className="flex w-screen justify-center bg-nav">
             <div className="flex w-3/5 justify-between p-4 items-center">
-                <div className="text-index" onClick={() => {window.location.replace("/")}} style={{fontFamily: "Open Sans:", fontStyle: "italic", fontWeight: "700"}}>
-                    Diet Diary
+                <div onClick={() => {window.location.replace("/")}} style={{fontFamily: "Open Sans:", fontStyle: "italic", fontWeight: "700", cursor: "pointer"}}>
+                    <Logo/>
                 </div>
-                <div className="flex justify-center w-1/3 text-xs" style={{fontFamily: "Open Sans:", fontWeight: "400"}}>
+                <div className="flex justify-center w-1/3 text-xs font-bold" style={{fontFamily: "Open Sans:", fontWeight: "400"}}>
                     {sessionStorage.getItem("username") === null
                     ?<></>
                     :sessionStorage.getItem("username") + "님 환영합니다"} 
                 </div>
                 <nav>
-                    <TailLink href="/searchfood" title="영양정보검색" />
+                    <TailLink href="/searchfood" title="영양성분검색" />
                     {token === null 
                     ?<><TailLink title="나의식단" handleClick={authen}/>
                     <TailLink href="/login" title="로그인"/>

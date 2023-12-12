@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { SERVER_URL } from "../comm/constants";
-import ButtonBlue from "../comm/ButtonGreen"
+import ButtonGray from "../comm/ButtonGray"
 import ModalSearch from "./ModalSearch";
 import ModalUpdate from "./ModalUpdate";
 import Paging from "../comm/Paging";
@@ -175,7 +175,7 @@ const MycalorieInsert = () => {
                                 </div>
                             </div>
                             <div className="flex mb-4 w-1/12 items-center justify-center">
-                                <ButtonBlue caption='추가' handleClick={foodInsert}/>
+                                <ButtonGray caption='추가' handleClick={foodInsert}/>
                             </div>
                         </div>
                     </div>

@@ -71,7 +71,7 @@ const FoodList = () => {
                         영양성분 검색
                     </div>
                     <div className="flex h-24 border-2 border-gray-200 rounded-xl items-center">
-                        <input className="ml-14 mt-5 w-5/6 h-1/2" 
+                        <input className="ml-14 mt-5 w-5/6 h-1/2 mr-5" 
                             type="text"
                             name="keyword"
                             id="keyword"
